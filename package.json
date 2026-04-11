@@ -30,5 +30,10 @@
     "ts-node": "^10.9.2",
     "typescript": "^6.0.2",
     "vitest": "^4.1.4"
+  },
+  "dependencies": {
+    "axios": "^1.15.0",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.4.1"
   }
 }
