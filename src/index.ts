@@ -4,7 +4,7 @@ import { DataSource } from "./interfaces/DataSource";
 
 export const main = async (): Promise<void> => {
   console.log("Daily Briefing Bot started.");
-  const scraper: DataSource = new WebScraperSource("Stadtbus Ravensburg Weingarten Source", process.env.SCRAPE_URL!);
+  const scraper: DataSource = new WebScraperSource("Stadtbus Ravensburg Weingarten Source", process.env.SCRAPE_URL!, "#aktuell");
   try {
     const data = await scraper.fetchData();
     console.log("Fetched data:", data);
