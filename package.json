@@ -4,10 +4,13 @@
   "description": "Automates daily tasks by collecting data from multiple sources, summarizing it with AI, and sending updates via Telegram.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -23,7 +26,9 @@
   "homepage": "https://github.com/alxmtzr/daily-briefing-bot#readme",
   "devDependencies": {
     "@types/node": "^25.6.0",
+    "@vitest/coverage-v8": "^4.1.4",
     "ts-node": "^10.9.2",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.4"
   }
 }

@@ -1,5 +1,8 @@
-const main = (): void => {
+export const main = (): void => {
   console.log("Daily Briefing Bot started.");
 };
 
-main();
+// istanbul ignore next
+if (require.main === module) {
+  main();
+}
