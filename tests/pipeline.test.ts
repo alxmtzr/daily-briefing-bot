@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { Pipeline } from "../src/pipeline";
 import { DataSource } from "../src/interfaces/DataSource";
 import { AIProvider } from "../src/interfaces/AIProvider";
