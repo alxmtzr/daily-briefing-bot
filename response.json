@@ -1,0 +1,730 @@
+Fetched data: {
+  "serverInfo": {
+    "controllerVersion": "10.6.30.4",
+    "serverID": "bw-ww32",
+    "virtDir": "nvbw",
+    "serverTime": "2026-04-12T11:34:38",
+    "calcTime": 75.426,
+    "logRequestId": "441f4141d97eb050"
+  },
+  "version": "11.0.6.72",
+  "systemMessages": [],
+  "locations": [
+    {
+      "id": "de:08436:8043",
+      "isGlobalId": true,
+      "name": "Ravensburg, Meersburger Brücke",
+      "disassembledName": "Meersburger Brücke",
+      "coord": [
+        5929356,
+        1069312
+      ],
+      "type": "stop",
+      "parent": {
+        "id": "placeID:8436064:1",
+        "name": "Ravensburg",
+        "type": "locality"
+      },
+      "assignedStops": [
+        {
+          "id": "de:08436:8043",
+          "isGlobalId": true,
+          "name": "Ravensburg Meersburger Brücke",
+          "disassembledName": "Meersburger Brücke",
+          "type": "stop",
+          "coord": [
+            5929356,
+            1069312
+          ],
+          "parent": {
+            "name": "Ravensburg",
+            "type": "locality"
+          },
+          "productClasses": [
+            5,
+            6
+          ],
+          "connectingMode": 100,
+          "properties": {
+            "stopId": "7708043"
+          }
+        }
+      ],
+      "properties": {
+        "stopId": "7708043"
+      }
+    }
+  ],
+  "stopEvents": [
+    {
+      "realtimeStatus": [
+        "MONITORED"
+      ],
+      "isRealtimeControlled": true,
+      "location": {
+        "id": "de:08436:8043:0:2",
+        "isGlobalId": true,
+        "name": "Ravensburg Meersburger Brücke",
+        "type": "platform",
+        "coord": [
+          5929372,
+          1069311
+        ],
+        "properties": {
+          "stopId": "7708043",
+          "area": "0",
+          "platform": "2"
+        },
+        "parent": {
+          "id": "de:08436:8043",
+          "isGlobalId": true,
+          "name": "Ravensburg Meersburger Brücke",
+          "disassembledName": "Meersburger Brücke",
+          "type": "stop",
+          "parent": {
+            "name": "Ravensburg",
+            "type": "locality"
+          },
+          "properties": {
+            "stopId": "7708043"
+          }
+        }
+      },
+      "departureTimePlanned": "2026-04-12T09:46:00Z",
+      "departureTimeBaseTimetable": "2026-04-12T09:46:00Z",
+      "departureTimeEstimated": "2026-04-12T09:46:00Z",
+      "transportation": {
+        "id": "rab:14301: :R:26a",
+        "name": "Stadtbus RV/WGT 1",
+        "disassembledName": "1",
+        "number": "1",
+        "product": {
+          "id": 9,
+          "class": 5,
+          "name": "Stadtbus RV/WGT",
+          "iconId": 3
+        },
+        "operator": {
+          "code": "RAB",
+          "id": "RAB",
+          "name": "rab"
+        },
+        "destination": {
+          "id": "7708001",
+          "name": "Baindt Marsweiler",
+          "type": "stop"
+        },
+        "properties": {
+          "isSTT": true,
+          "tripCode": 268,
+          "lineDisplay": "LINE",
+          "globalId": "de:bodo:09001_:"
+        },
+        "origin": {
+          "id": "7708155",
+          "name": "Ravensburg, Hofgut",
+          "type": "stop"
+        }
+      },
+      "infos": [
+        {
+          "priority": "high",
+          "id": "ems-11882",
+          "version": 6,
+          "type": "stopInfo",
+          "properties": {
+            "publisher": "ems.comm.addinfo",
+            "infoType": "stopInfo",
+            "sourceSystemID": "live_efa_config"
+          },
+          "infoLinks": [
+            {
+              "urlText": "Haltestellen Ravensburg Meersburger Brücke\n        , Marienplatz\n        , Meersburger Brücke\n        , Mühlbruck\n        und Heilig-Geist-Spital\n: Haltausfall durch Baustelle",
+              "url": "http://nohost",
+              "content": "An den Haltestellen <b>Ravensburg Meersburger Brücke</b>\n            ,<b>Marienplatz</b>\n            ,<b>Meersburger Brücke</b>\n            ,<b>Mühlbruck</b>\n            und <b>Heilig-Geist-Spital</b>\n    kommt es\n\tvom 07. März 2026 ab 04:30 Uhr bis 01. September 2026 um 02:00 Uhr\n\tzu <b>einem Haltausfall</b> wegen einer Baustelle.<br>\n<div>Auf Grund einer Bauma&szlig;nahme ist die Meersburger Br&uuml;cke halbseitig in Fahrtrichtung stadtausw&auml;rts vom 07.03.2026 Betriebsbeginn bis vsl. 31.08.2026 gesperrt.</div>\n<div>Es entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital. In Fahrtrichtung stadtausw&auml;rts Meersburger Br&uuml;cke und M&uuml;hlbruck.</div>\n<div>Auf der Linie 1 / 700 / 710 / R70 bestehen Baustellenfahrpl&auml;ne!!!</div>",
+              "subtitle": "Haltestellen Ravensburg Meersburger Brücke\n        , Marienplatz\n        , Meersburger Brücke\n        , Mühlbruck\n        und Heilig-Geist-Spital\n: Haltausfall durch Baustelle",
+              "htmlText": "An den Haltestellen <b>Ravensburg Meersburger Brücke</b>\n            ,<b>Marienplatz</b>\n            ,<b>Meersburger Brücke</b>\n            ,<b>Mühlbruck</b>\n            und <b>Heilig-Geist-Spital</b>\n    kommt es\n\tvom 07. März 2026 ab 04:30 Uhr bis 01. September 2026 um 02:00 Uhr\n\tzu <b>einem Haltausfall</b> wegen einer Baustelle.<br>\n<div>Auf Grund einer Bauma&szlig;nahme ist die Meersburger Br&uuml;cke halbseitig in Fahrtrichtung stadtausw&auml;rts vom 07.03.2026 Betriebsbeginn bis vsl. 31.08.2026 gesperrt.</div>\n<div>Es entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital. In Fahrtrichtung stadtausw&auml;rts Meersburger Br&uuml;cke und M&uuml;hlbruck.</div>\n<div>Auf der Linie 1 / 700 / 710 / R70 bestehen Baustellenfahrpl&auml;ne!!!</div>"
+            }
+          ]
+        },
+        {
+          "priority": "high",
+          "id": "ems-11850",
+          "version": 79707,
+          "type": "lineInfo",
+          "properties": {
+            "publisher": "ems.comm.addinfo",
+            "infoType": "lineInfo",
+            "sourceSystemID": "live_efa_config"
+          },
+          "infoLinks": [
+            {
+              "urlText": "Linien 1, 3, 4, 700, 710 und R70: Haltausfall wegen einer Baustelle",
+              "url": "http://nohost",
+              "content": "Zwischen <b>Ravensburg Bahnhof</b> und <b>Ravensburg Mühlbruck</b> kommt es\nvom 07. März 2026 ab 00:00 Uhr bis 31. August 2026 um 23:59 Uhr\nzu <b>einem Haltausfall</b> wegen einer Baustelle. Betroffen <b>sind die Linien 1, 3, 4, 700, 710 und R70</b>.<br>\n\n</br>\n<div>Aufgrund der halbseitigen Sperrung der Meersburger Br&uuml;cke in Ravensburg (07.03.&ndash;31.08.2026) fahren die Linien 1 / 700 / 710 ab Ravensburg Bahnhof stadtausw&auml;rts ab Bussteig 10 &uuml;ber Am Alten Gaswerk &ndash; Metzgerstra&szlig;e &ndash; Br&uuml;hlstra&szlig;e zur Ersatzhaltestelle M&uuml;hlbruck; die Haltestellen Marienplatz, Heilig-Geist-Spital und Meersburger Br&uuml;cke entfallen.&nbsp;</div>\n<div>Bitte beachten Sie die fr&uuml;heren Abfahrtszeiten aufgrund der Umleitungen und die Durchsagen im Bus. Jene sind in der online Fahrplanauskunft bereits eingespielt.<br />Die Linie 4 / R70 wird stadtausw&auml;rts umgeleitet, R70 h&auml;lt an M&uuml;hlbruck, Linie 4 weiter nach Plan.<br />Stadteinw&auml;rts entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital, daf&uuml;r wird die Ersatzhalt in der Karlstra&szlig;e bedient.&nbsp;</div>\n<div>Die Ersatzfahrpl&auml;ne finden sie unter: <a href=\"https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html\" target=\"_blank\" rel=\"noopener\">https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html</a></div>\n<div>Der aktualisierten Steigbelegungsplan am Bahnhof Ravensburg w&auml;hren der Sperrung der Meersburger Br&uuml;cke finden Sie unter: <a href=\"https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/\" target=\"_blank\" rel=\"noopener\">https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/</a></div>",
+              "subtitle": "Linien 1, 3, 4, 700, 710 und R70: Haltausfall wegen einer Baustelle",
+              "htmlText": "Zwischen <b>Ravensburg Bahnhof</b> und <b>Ravensburg Mühlbruck</b> kommt es\nvom 07. März 2026 ab 00:00 Uhr bis 31. August 2026 um 23:59 Uhr\nzu <b>einem Haltausfall</b> wegen einer Baustelle. Betroffen <b>sind die Linien 1, 3, 4, 700, 710 und R70</b>.<br>\n\n</br>\n<div>Aufgrund der halbseitigen Sperrung der Meersburger Br&uuml;cke in Ravensburg (07.03.&ndash;31.08.2026) fahren die Linien 1 / 700 / 710 ab Ravensburg Bahnhof stadtausw&auml;rts ab Bussteig 10 &uuml;ber Am Alten Gaswerk &ndash; Metzgerstra&szlig;e &ndash; Br&uuml;hlstra&szlig;e zur Ersatzhaltestelle M&uuml;hlbruck; die Haltestellen Marienplatz, Heilig-Geist-Spital und Meersburger Br&uuml;cke entfallen.&nbsp;</div>\n<div>Bitte beachten Sie die fr&uuml;heren Abfahrtszeiten aufgrund der Umleitungen und die Durchsagen im Bus. Jene sind in der online Fahrplanauskunft bereits eingespielt.<br />Die Linie 4 / R70 wird stadtausw&auml;rts umgeleitet, R70 h&auml;lt an M&uuml;hlbruck, Linie 4 weiter nach Plan.<br />Stadteinw&auml;rts entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital, daf&uuml;r wird die Ersatzhalt in der Karlstra&szlig;e bedient.&nbsp;</div>\n<div>Die Ersatzfahrpl&auml;ne finden sie unter: <a href=\"https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html\" target=\"_blank\" rel=\"noopener\">https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html</a></div>\n<div>Der aktualisierten Steigbelegungsplan am Bahnhof Ravensburg w&auml;hren der Sperrung der Meersburger Br&uuml;cke finden Sie unter: <a href=\"https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/\" target=\"_blank\" rel=\"noopener\">https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/</a></div>"
+            }
+          ]
+        }
+      ],
+      "hints": [
+        {
+          "content": "Behindertengerecht",
+          "providerCode": "1",
+          "type": "Timetable",
+          "properties": {
+            "subnet": "rab"
+          }
+        },
+        {
+          "content": "Niederflurbus, für Rollstuhlfahrer geeignet",
+          "providerCode": "1a",
+          "type": "Timetable",
+          "properties": {
+            "subnet": "rab"
+          }
+        }
+      ],
+      "properties": {
+        "AVMSTripID": "80:01:4301184"
+      }
+    },
+    {
+      "realtimeStatus": [
+        "MONITORED"
+      ],
+      "isRealtimeControlled": true,
+      "location": {
+        "id": "de:08436:8043:0:2",
+        "isGlobalId": true,
+        "name": "Ravensburg Meersburger Brücke",
+        "type": "platform",
+        "coord": [
+          5929372,
+          1069311
+        ],
+        "properties": {
+          "stopId": "7708043",
+          "area": "0",
+          "platform": "2"
+        },
+        "parent": {
+          "id": "de:08436:8043",
+          "isGlobalId": true,
+          "name": "Ravensburg Meersburger Brücke",
+          "disassembledName": "Meersburger Brücke",
+          "type": "stop",
+          "parent": {
+            "name": "Ravensburg",
+            "type": "locality"
+          },
+          "properties": {
+            "stopId": "7708043"
+          }
+        }
+      },
+      "departureTimePlanned": "2026-04-12T09:58:00Z",
+      "departureTimeBaseTimetable": "2026-04-12T09:58:00Z",
+      "departureTimeEstimated": "2026-04-12T09:58:36Z",
+      "transportation": {
+        "id": "rab:14070: :R:26a",
+        "name": "Regionalbus R70",
+        "disassembledName": "R70",
+        "number": "R70",
+        "product": {
+          "id": 0,
+          "class": 6,
+          "name": "Regionalbus",
+          "iconId": 3
+        },
+        "operator": {
+          "code": "RAB",
+          "id": "RAB",
+          "name": "rab"
+        },
+        "destination": {
+          "id": "7708000",
+          "name": "Ravensburg Bahnhof",
+          "type": "stop"
+        },
+        "properties": {
+          "isSTT": true,
+          "tripCode": 71,
+          "lineDisplay": "LINE",
+          "globalId": "de:bodo:09R70_:"
+        },
+        "origin": {
+          "id": "7708423",
+          "name": "Wilhelmsdorf Saalplatz",
+          "type": "stop"
+        }
+      },
+      "infos": [
+        {
+          "priority": "high",
+          "id": "ems-11882",
+          "version": 6,
+          "type": "stopInfo",
+          "properties": {
+            "publisher": "ems.comm.addinfo",
+            "infoType": "stopInfo",
+            "sourceSystemID": "live_efa_config"
+          },
+          "infoLinks": [
+            {
+              "urlText": "Haltestellen Ravensburg Meersburger Brücke\n        , Marienplatz\n        , Meersburger Brücke\n        , Mühlbruck\n        und Heilig-Geist-Spital\n: Haltausfall durch Baustelle",
+              "url": "http://nohost",
+              "content": "An den Haltestellen <b>Ravensburg Meersburger Brücke</b>\n            ,<b>Marienplatz</b>\n            ,<b>Meersburger Brücke</b>\n            ,<b>Mühlbruck</b>\n            und <b>Heilig-Geist-Spital</b>\n    kommt es\n\tvom 07. März 2026 ab 04:30 Uhr bis 01. September 2026 um 02:00 Uhr\n\tzu <b>einem Haltausfall</b> wegen einer Baustelle.<br>\n<div>Auf Grund einer Bauma&szlig;nahme ist die Meersburger Br&uuml;cke halbseitig in Fahrtrichtung stadtausw&auml;rts vom 07.03.2026 Betriebsbeginn bis vsl. 31.08.2026 gesperrt.</div>\n<div>Es entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital. In Fahrtrichtung stadtausw&auml;rts Meersburger Br&uuml;cke und M&uuml;hlbruck.</div>\n<div>Auf der Linie 1 / 700 / 710 / R70 bestehen Baustellenfahrpl&auml;ne!!!</div>",
+              "subtitle": "Haltestellen Ravensburg Meersburger Brücke\n        , Marienplatz\n        , Meersburger Brücke\n        , Mühlbruck\n        und Heilig-Geist-Spital\n: Haltausfall durch Baustelle",
+              "htmlText": "An den Haltestellen <b>Ravensburg Meersburger Brücke</b>\n            ,<b>Marienplatz</b>\n            ,<b>Meersburger Brücke</b>\n            ,<b>Mühlbruck</b>\n            und <b>Heilig-Geist-Spital</b>\n    kommt es\n\tvom 07. März 2026 ab 04:30 Uhr bis 01. September 2026 um 02:00 Uhr\n\tzu <b>einem Haltausfall</b> wegen einer Baustelle.<br>\n<div>Auf Grund einer Bauma&szlig;nahme ist die Meersburger Br&uuml;cke halbseitig in Fahrtrichtung stadtausw&auml;rts vom 07.03.2026 Betriebsbeginn bis vsl. 31.08.2026 gesperrt.</div>\n<div>Es entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital. In Fahrtrichtung stadtausw&auml;rts Meersburger Br&uuml;cke und M&uuml;hlbruck.</div>\n<div>Auf der Linie 1 / 700 / 710 / R70 bestehen Baustellenfahrpl&auml;ne!!!</div>"
+            }
+          ]
+        },
+        {
+          "priority": "high",
+          "id": "ems-11850",
+          "version": 79707,
+          "type": "lineInfo",
+          "properties": {
+            "publisher": "ems.comm.addinfo",
+            "infoType": "lineInfo",
+            "sourceSystemID": "live_efa_config"
+          },
+          "infoLinks": [
+            {
+              "urlText": "Linien 1, 3, 4, 700, 710 und R70: Haltausfall wegen einer Baustelle",
+              "url": "http://nohost",
+              "content": "Zwischen <b>Ravensburg Bahnhof</b> und <b>Ravensburg Mühlbruck</b> kommt es\nvom 07. März 2026 ab 00:00 Uhr bis 31. August 2026 um 23:59 Uhr\nzu <b>einem Haltausfall</b> wegen einer Baustelle. Betroffen <b>sind die Linien 1, 3, 4, 700, 710 und R70</b>.<br>\n\n</br>\n<div>Aufgrund der halbseitigen Sperrung der Meersburger Br&uuml;cke in Ravensburg (07.03.&ndash;31.08.2026) fahren die Linien 1 / 700 / 710 ab Ravensburg Bahnhof stadtausw&auml;rts ab Bussteig 10 &uuml;ber Am Alten Gaswerk &ndash; Metzgerstra&szlig;e &ndash; Br&uuml;hlstra&szlig;e zur Ersatzhaltestelle M&uuml;hlbruck; die Haltestellen Marienplatz, Heilig-Geist-Spital und Meersburger Br&uuml;cke entfallen.&nbsp;</div>\n<div>Bitte beachten Sie die fr&uuml;heren Abfahrtszeiten aufgrund der Umleitungen und die Durchsagen im Bus. Jene sind in der online Fahrplanauskunft bereits eingespielt.<br />Die Linie 4 / R70 wird stadtausw&auml;rts umgeleitet, R70 h&auml;lt an M&uuml;hlbruck, Linie 4 weiter nach Plan.<br />Stadteinw&auml;rts entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital, daf&uuml;r wird die Ersatzhalt in der Karlstra&szlig;e bedient.&nbsp;</div>\n<div>Die Ersatzfahrpl&auml;ne finden sie unter: <a href=\"https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html\" target=\"_blank\" rel=\"noopener\">https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html</a></div>\n<div>Der aktualisierten Steigbelegungsplan am Bahnhof Ravensburg w&auml;hren der Sperrung der Meersburger Br&uuml;cke finden Sie unter: <a href=\"https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/\" target=\"_blank\" rel=\"noopener\">https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/</a></div>",
+              "subtitle": "Linien 1, 3, 4, 700, 710 und R70: Haltausfall wegen einer Baustelle",
+              "htmlText": "Zwischen <b>Ravensburg Bahnhof</b> und <b>Ravensburg Mühlbruck</b> kommt es\nvom 07. März 2026 ab 00:00 Uhr bis 31. August 2026 um 23:59 Uhr\nzu <b>einem Haltausfall</b> wegen einer Baustelle. Betroffen <b>sind die Linien 1, 3, 4, 700, 710 und R70</b>.<br>\n\n</br>\n<div>Aufgrund der halbseitigen Sperrung der Meersburger Br&uuml;cke in Ravensburg (07.03.&ndash;31.08.2026) fahren die Linien 1 / 700 / 710 ab Ravensburg Bahnhof stadtausw&auml;rts ab Bussteig 10 &uuml;ber Am Alten Gaswerk &ndash; Metzgerstra&szlig;e &ndash; Br&uuml;hlstra&szlig;e zur Ersatzhaltestelle M&uuml;hlbruck; die Haltestellen Marienplatz, Heilig-Geist-Spital und Meersburger Br&uuml;cke entfallen.&nbsp;</div>\n<div>Bitte beachten Sie die fr&uuml;heren Abfahrtszeiten aufgrund der Umleitungen und die Durchsagen im Bus. Jene sind in der online Fahrplanauskunft bereits eingespielt.<br />Die Linie 4 / R70 wird stadtausw&auml;rts umgeleitet, R70 h&auml;lt an M&uuml;hlbruck, Linie 4 weiter nach Plan.<br />Stadteinw&auml;rts entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital, daf&uuml;r wird die Ersatzhalt in der Karlstra&szlig;e bedient.&nbsp;</div>\n<div>Die Ersatzfahrpl&auml;ne finden sie unter: <a href=\"https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html\" target=\"_blank\" rel=\"noopener\">https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html</a></div>\n<div>Der aktualisierten Steigbelegungsplan am Bahnhof Ravensburg w&auml;hren der Sperrung der Meersburger Br&uuml;cke finden Sie unter: <a href=\"https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/\" target=\"_blank\" rel=\"noopener\">https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/</a></div>"
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "AVMSTripID": "80:03:4070098"
+      }
+    },
+    {
+      "realtimeStatus": [
+        "MONITORED"
+      ],
+      "isRealtimeControlled": true,
+      "location": {
+        "id": "de:08436:8043:0:2",
+        "isGlobalId": true,
+        "name": "Ravensburg Meersburger Brücke",
+        "type": "platform",
+        "coord": [
+          5929372,
+          1069311
+        ],
+        "properties": {
+          "stopId": "7708043",
+          "area": "0",
+          "platform": "2"
+        },
+        "parent": {
+          "id": "de:08436:8043",
+          "isGlobalId": true,
+          "name": "Ravensburg Meersburger Brücke",
+          "disassembledName": "Meersburger Brücke",
+          "type": "stop",
+          "parent": {
+            "name": "Ravensburg",
+            "type": "locality"
+          },
+          "properties": {
+            "stopId": "7708043"
+          }
+        }
+      },
+      "departureTimePlanned": "2026-04-12T10:16:00Z",
+      "departureTimeBaseTimetable": "2026-04-12T10:16:00Z",
+      "departureTimeEstimated": "2026-04-12T10:16:00Z",
+      "transportation": {
+        "id": "rab:14301: :R:26a",
+        "name": "Stadtbus RV/WGT 1",
+        "disassembledName": "1",
+        "number": "1",
+        "product": {
+          "id": 9,
+          "class": 5,
+          "name": "Stadtbus RV/WGT",
+          "iconId": 3
+        },
+        "operator": {
+          "code": "RAB",
+          "id": "RAB",
+          "name": "rab"
+        },
+        "destination": {
+          "id": "7708011",
+          "name": "Weingarten Charlottenplatz",
+          "type": "stop"
+        },
+        "properties": {
+          "isSTT": true,
+          "tripCode": 313,
+          "lineDisplay": "LINE",
+          "globalId": "de:bodo:09001_:"
+        },
+        "origin": {
+          "id": "7708063",
+          "name": "Ravensburg Schmalegg Ortsmitte",
+          "type": "stop"
+        }
+      },
+      "infos": [
+        {
+          "priority": "high",
+          "id": "ems-11882",
+          "version": 6,
+          "type": "stopInfo",
+          "properties": {
+            "publisher": "ems.comm.addinfo",
+            "infoType": "stopInfo",
+            "sourceSystemID": "live_efa_config"
+          },
+          "infoLinks": [
+            {
+              "urlText": "Haltestellen Ravensburg Meersburger Brücke\n        , Marienplatz\n        , Meersburger Brücke\n        , Mühlbruck\n        und Heilig-Geist-Spital\n: Haltausfall durch Baustelle",
+              "url": "http://nohost",
+              "content": "An den Haltestellen <b>Ravensburg Meersburger Brücke</b>\n            ,<b>Marienplatz</b>\n            ,<b>Meersburger Brücke</b>\n            ,<b>Mühlbruck</b>\n            und <b>Heilig-Geist-Spital</b>\n    kommt es\n\tvom 07. März 2026 ab 04:30 Uhr bis 01. September 2026 um 02:00 Uhr\n\tzu <b>einem Haltausfall</b> wegen einer Baustelle.<br>\n<div>Auf Grund einer Bauma&szlig;nahme ist die Meersburger Br&uuml;cke halbseitig in Fahrtrichtung stadtausw&auml;rts vom 07.03.2026 Betriebsbeginn bis vsl. 31.08.2026 gesperrt.</div>\n<div>Es entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital. In Fahrtrichtung stadtausw&auml;rts Meersburger Br&uuml;cke und M&uuml;hlbruck.</div>\n<div>Auf der Linie 1 / 700 / 710 / R70 bestehen Baustellenfahrpl&auml;ne!!!</div>",
+              "subtitle": "Haltestellen Ravensburg Meersburger Brücke\n        , Marienplatz\n        , Meersburger Brücke\n        , Mühlbruck\n        und Heilig-Geist-Spital\n: Haltausfall durch Baustelle",
+              "htmlText": "An den Haltestellen <b>Ravensburg Meersburger Brücke</b>\n            ,<b>Marienplatz</b>\n            ,<b>Meersburger Brücke</b>\n            ,<b>Mühlbruck</b>\n            und <b>Heilig-Geist-Spital</b>\n    kommt es\n\tvom 07. März 2026 ab 04:30 Uhr bis 01. September 2026 um 02:00 Uhr\n\tzu <b>einem Haltausfall</b> wegen einer Baustelle.<br>\n<div>Auf Grund einer Bauma&szlig;nahme ist die Meersburger Br&uuml;cke halbseitig in Fahrtrichtung stadtausw&auml;rts vom 07.03.2026 Betriebsbeginn bis vsl. 31.08.2026 gesperrt.</div>\n<div>Es entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital. In Fahrtrichtung stadtausw&auml;rts Meersburger Br&uuml;cke und M&uuml;hlbruck.</div>\n<div>Auf der Linie 1 / 700 / 710 / R70 bestehen Baustellenfahrpl&auml;ne!!!</div>"
+            }
+          ]
+        },
+        {
+          "priority": "high",
+          "id": "ems-11850",
+          "version": 79707,
+          "type": "lineInfo",
+          "properties": {
+            "publisher": "ems.comm.addinfo",
+            "infoType": "lineInfo",
+            "sourceSystemID": "live_efa_config"
+          },
+          "infoLinks": [
+            {
+              "urlText": "Linien 1, 3, 4, 700, 710 und R70: Haltausfall wegen einer Baustelle",
+              "url": "http://nohost",
+              "content": "Zwischen <b>Ravensburg Bahnhof</b> und <b>Ravensburg Mühlbruck</b> kommt es\nvom 07. März 2026 ab 00:00 Uhr bis 31. August 2026 um 23:59 Uhr\nzu <b>einem Haltausfall</b> wegen einer Baustelle. Betroffen <b>sind die Linien 1, 3, 4, 700, 710 und R70</b>.<br>\n\n</br>\n<div>Aufgrund der halbseitigen Sperrung der Meersburger Br&uuml;cke in Ravensburg (07.03.&ndash;31.08.2026) fahren die Linien 1 / 700 / 710 ab Ravensburg Bahnhof stadtausw&auml;rts ab Bussteig 10 &uuml;ber Am Alten Gaswerk &ndash; Metzgerstra&szlig;e &ndash; Br&uuml;hlstra&szlig;e zur Ersatzhaltestelle M&uuml;hlbruck; die Haltestellen Marienplatz, Heilig-Geist-Spital und Meersburger Br&uuml;cke entfallen.&nbsp;</div>\n<div>Bitte beachten Sie die fr&uuml;heren Abfahrtszeiten aufgrund der Umleitungen und die Durchsagen im Bus. Jene sind in der online Fahrplanauskunft bereits eingespielt.<br />Die Linie 4 / R70 wird stadtausw&auml;rts umgeleitet, R70 h&auml;lt an M&uuml;hlbruck, Linie 4 weiter nach Plan.<br />Stadteinw&auml;rts entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital, daf&uuml;r wird die Ersatzhalt in der Karlstra&szlig;e bedient.&nbsp;</div>\n<div>Die Ersatzfahrpl&auml;ne finden sie unter: <a href=\"https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html\" target=\"_blank\" rel=\"noopener\">https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html</a></div>\n<div>Der aktualisierten Steigbelegungsplan am Bahnhof Ravensburg w&auml;hren der Sperrung der Meersburger Br&uuml;cke finden Sie unter: <a href=\"https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/\" target=\"_blank\" rel=\"noopener\">https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/</a></div>",
+              "subtitle": "Linien 1, 3, 4, 700, 710 und R70: Haltausfall wegen einer Baustelle",
+              "htmlText": "Zwischen <b>Ravensburg Bahnhof</b> und <b>Ravensburg Mühlbruck</b> kommt es\nvom 07. März 2026 ab 00:00 Uhr bis 31. August 2026 um 23:59 Uhr\nzu <b>einem Haltausfall</b> wegen einer Baustelle. Betroffen <b>sind die Linien 1, 3, 4, 700, 710 und R70</b>.<br>\n\n</br>\n<div>Aufgrund der halbseitigen Sperrung der Meersburger Br&uuml;cke in Ravensburg (07.03.&ndash;31.08.2026) fahren die Linien 1 / 700 / 710 ab Ravensburg Bahnhof stadtausw&auml;rts ab Bussteig 10 &uuml;ber Am Alten Gaswerk &ndash; Metzgerstra&szlig;e &ndash; Br&uuml;hlstra&szlig;e zur Ersatzhaltestelle M&uuml;hlbruck; die Haltestellen Marienplatz, Heilig-Geist-Spital und Meersburger Br&uuml;cke entfallen.&nbsp;</div>\n<div>Bitte beachten Sie die fr&uuml;heren Abfahrtszeiten aufgrund der Umleitungen und die Durchsagen im Bus. Jene sind in der online Fahrplanauskunft bereits eingespielt.<br />Die Linie 4 / R70 wird stadtausw&auml;rts umgeleitet, R70 h&auml;lt an M&uuml;hlbruck, Linie 4 weiter nach Plan.<br />Stadteinw&auml;rts entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital, daf&uuml;r wird die Ersatzhalt in der Karlstra&szlig;e bedient.&nbsp;</div>\n<div>Die Ersatzfahrpl&auml;ne finden sie unter: <a href=\"https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html\" target=\"_blank\" rel=\"noopener\">https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html</a></div>\n<div>Der aktualisierten Steigbelegungsplan am Bahnhof Ravensburg w&auml;hren der Sperrung der Meersburger Br&uuml;cke finden Sie unter: <a href=\"https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/\" target=\"_blank\" rel=\"noopener\">https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/</a></div>"
+            }
+          ]
+        }
+      ],
+      "hints": [
+        {
+          "content": "Behindertengerecht",
+          "providerCode": "1",
+          "type": "Timetable",
+          "properties": {
+            "subnet": "rab"
+          }
+        },
+        {
+          "content": "Niederflurbus, für Rollstuhlfahrer geeignet",
+          "providerCode": "1a",
+          "type": "Timetable",
+          "properties": {
+            "subnet": "rab"
+          }
+        }
+      ],
+      "properties": {
+        "AVMSTripID": "80:01:4301200"
+      }
+    },
+    {
+      "realtimeStatus": [
+        "EXTRA_STOPS",
+        "DEVIATION",
+        "MONITORED"
+      ],
+      "isRealtimeControlled": true,
+      "location": {
+        "id": "de:08436:8043:0:2",
+        "isGlobalId": true,
+        "name": "Ravensburg Meersburger Brücke",
+        "type": "platform",
+        "coord": [
+          5929372,
+          1069311
+        ],
+        "properties": {
+          "stopId": "7708043",
+          "area": "0",
+          "platform": "2"
+        },
+        "parent": {
+          "id": "de:08436:8043",
+          "isGlobalId": true,
+          "name": "Ravensburg Meersburger Brücke",
+          "disassembledName": "Meersburger Brücke",
+          "type": "stop",
+          "parent": {
+            "name": "Ravensburg",
+            "type": "locality"
+          },
+          "properties": {
+            "stopId": "7708043"
+          }
+        }
+      },
+      "departureTimePlanned": "2026-04-12T10:17:00Z",
+      "departureTimeBaseTimetable": "2026-04-12T10:17:00Z",
+      "departureTimeEstimated": "2026-04-12T10:17:00Z",
+      "transportation": {
+        "id": "rab:14700: :R:26a",
+        "name": "RegioBus 700",
+        "disassembledName": "700",
+        "number": "700",
+        "product": {
+          "id": 30,
+          "class": 6,
+          "name": "RegioBus",
+          "iconId": 3
+        },
+        "operator": {
+          "code": "RAB",
+          "id": "RAB",
+          "name": "rab"
+        },
+        "destination": {
+          "id": "7708000",
+          "name": "Ravensburg Bahnhof",
+          "type": "stop"
+        },
+        "properties": {
+          "isSTT": true,
+          "tripCode": 74,
+          "lineDisplay": "LINE",
+          "globalId": "de:bodo:09700_:"
+        },
+        "origin": {
+          "id": "8706554",
+          "name": "Konstanz Bahnhof",
+          "type": "stop"
+        }
+      },
+      "infos": [
+        {
+          "priority": "high",
+          "id": "ems-11882",
+          "version": 6,
+          "type": "stopInfo",
+          "properties": {
+            "publisher": "ems.comm.addinfo",
+            "infoType": "stopInfo",
+            "sourceSystemID": "live_efa_config"
+          },
+          "infoLinks": [
+            {
+              "urlText": "Haltestellen Ravensburg Meersburger Brücke\n        , Marienplatz\n        , Meersburger Brücke\n        , Mühlbruck\n        und Heilig-Geist-Spital\n: Haltausfall durch Baustelle",
+              "url": "http://nohost",
+              "content": "An den Haltestellen <b>Ravensburg Meersburger Brücke</b>\n            ,<b>Marienplatz</b>\n            ,<b>Meersburger Brücke</b>\n            ,<b>Mühlbruck</b>\n            und <b>Heilig-Geist-Spital</b>\n    kommt es\n\tvom 07. März 2026 ab 04:30 Uhr bis 01. September 2026 um 02:00 Uhr\n\tzu <b>einem Haltausfall</b> wegen einer Baustelle.<br>\n<div>Auf Grund einer Bauma&szlig;nahme ist die Meersburger Br&uuml;cke halbseitig in Fahrtrichtung stadtausw&auml;rts vom 07.03.2026 Betriebsbeginn bis vsl. 31.08.2026 gesperrt.</div>\n<div>Es entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital. In Fahrtrichtung stadtausw&auml;rts Meersburger Br&uuml;cke und M&uuml;hlbruck.</div>\n<div>Auf der Linie 1 / 700 / 710 / R70 bestehen Baustellenfahrpl&auml;ne!!!</div>",
+              "subtitle": "Haltestellen Ravensburg Meersburger Brücke\n        , Marienplatz\n        , Meersburger Brücke\n        , Mühlbruck\n        und Heilig-Geist-Spital\n: Haltausfall durch Baustelle",
+              "htmlText": "An den Haltestellen <b>Ravensburg Meersburger Brücke</b>\n            ,<b>Marienplatz</b>\n            ,<b>Meersburger Brücke</b>\n            ,<b>Mühlbruck</b>\n            und <b>Heilig-Geist-Spital</b>\n    kommt es\n\tvom 07. März 2026 ab 04:30 Uhr bis 01. September 2026 um 02:00 Uhr\n\tzu <b>einem Haltausfall</b> wegen einer Baustelle.<br>\n<div>Auf Grund einer Bauma&szlig;nahme ist die Meersburger Br&uuml;cke halbseitig in Fahrtrichtung stadtausw&auml;rts vom 07.03.2026 Betriebsbeginn bis vsl. 31.08.2026 gesperrt.</div>\n<div>Es entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital. In Fahrtrichtung stadtausw&auml;rts Meersburger Br&uuml;cke und M&uuml;hlbruck.</div>\n<div>Auf der Linie 1 / 700 / 710 / R70 bestehen Baustellenfahrpl&auml;ne!!!</div>"
+            }
+          ]
+        },
+        {
+          "priority": "high",
+          "id": "ems-11850",
+          "version": 79707,
+          "type": "lineInfo",
+          "properties": {
+            "publisher": "ems.comm.addinfo",
+            "infoType": "lineInfo",
+            "sourceSystemID": "live_efa_config"
+          },
+          "infoLinks": [
+            {
+              "urlText": "Linien 1, 3, 4, 700, 710 und R70: Haltausfall wegen einer Baustelle",
+              "url": "http://nohost",
+              "content": "Zwischen <b>Ravensburg Bahnhof</b> und <b>Ravensburg Mühlbruck</b> kommt es\nvom 07. März 2026 ab 00:00 Uhr bis 31. August 2026 um 23:59 Uhr\nzu <b>einem Haltausfall</b> wegen einer Baustelle. Betroffen <b>sind die Linien 1, 3, 4, 700, 710 und R70</b>.<br>\n\n</br>\n<div>Aufgrund der halbseitigen Sperrung der Meersburger Br&uuml;cke in Ravensburg (07.03.&ndash;31.08.2026) fahren die Linien 1 / 700 / 710 ab Ravensburg Bahnhof stadtausw&auml;rts ab Bussteig 10 &uuml;ber Am Alten Gaswerk &ndash; Metzgerstra&szlig;e &ndash; Br&uuml;hlstra&szlig;e zur Ersatzhaltestelle M&uuml;hlbruck; die Haltestellen Marienplatz, Heilig-Geist-Spital und Meersburger Br&uuml;cke entfallen.&nbsp;</div>\n<div>Bitte beachten Sie die fr&uuml;heren Abfahrtszeiten aufgrund der Umleitungen und die Durchsagen im Bus. Jene sind in der online Fahrplanauskunft bereits eingespielt.<br />Die Linie 4 / R70 wird stadtausw&auml;rts umgeleitet, R70 h&auml;lt an M&uuml;hlbruck, Linie 4 weiter nach Plan.<br />Stadteinw&auml;rts entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital, daf&uuml;r wird die Ersatzhalt in der Karlstra&szlig;e bedient.&nbsp;</div>\n<div>Die Ersatzfahrpl&auml;ne finden sie unter: <a href=\"https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html\" target=\"_blank\" rel=\"noopener\">https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html</a></div>\n<div>Der aktualisierten Steigbelegungsplan am Bahnhof Ravensburg w&auml;hren der Sperrung der Meersburger Br&uuml;cke finden Sie unter: <a href=\"https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/\" target=\"_blank\" rel=\"noopener\">https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/</a></div>",
+              "subtitle": "Linien 1, 3, 4, 700, 710 und R70: Haltausfall wegen einer Baustelle",
+              "htmlText": "Zwischen <b>Ravensburg Bahnhof</b> und <b>Ravensburg Mühlbruck</b> kommt es\nvom 07. März 2026 ab 00:00 Uhr bis 31. August 2026 um 23:59 Uhr\nzu <b>einem Haltausfall</b> wegen einer Baustelle. Betroffen <b>sind die Linien 1, 3, 4, 700, 710 und R70</b>.<br>\n\n</br>\n<div>Aufgrund der halbseitigen Sperrung der Meersburger Br&uuml;cke in Ravensburg (07.03.&ndash;31.08.2026) fahren die Linien 1 / 700 / 710 ab Ravensburg Bahnhof stadtausw&auml;rts ab Bussteig 10 &uuml;ber Am Alten Gaswerk &ndash; Metzgerstra&szlig;e &ndash; Br&uuml;hlstra&szlig;e zur Ersatzhaltestelle M&uuml;hlbruck; die Haltestellen Marienplatz, Heilig-Geist-Spital und Meersburger Br&uuml;cke entfallen.&nbsp;</div>\n<div>Bitte beachten Sie die fr&uuml;heren Abfahrtszeiten aufgrund der Umleitungen und die Durchsagen im Bus. Jene sind in der online Fahrplanauskunft bereits eingespielt.<br />Die Linie 4 / R70 wird stadtausw&auml;rts umgeleitet, R70 h&auml;lt an M&uuml;hlbruck, Linie 4 weiter nach Plan.<br />Stadteinw&auml;rts entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital, daf&uuml;r wird die Ersatzhalt in der Karlstra&szlig;e bedient.&nbsp;</div>\n<div>Die Ersatzfahrpl&auml;ne finden sie unter: <a href=\"https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html\" target=\"_blank\" rel=\"noopener\">https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html</a></div>\n<div>Der aktualisierten Steigbelegungsplan am Bahnhof Ravensburg w&auml;hren der Sperrung der Meersburger Br&uuml;cke finden Sie unter: <a href=\"https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/\" target=\"_blank\" rel=\"noopener\">https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/</a></div>"
+            }
+          ]
+        }
+      ],
+      "hints": [
+        {
+          "content": "Behindertengerecht",
+          "providerCode": "1",
+          "type": "Timetable",
+          "properties": {
+            "subnet": "rab"
+          }
+        },
+        {
+          "content": "Bus wartet in Markdorf max. 5 Minuten auf verspätete Anschlusszüge",
+          "providerCode": "0T",
+          "type": "Timetable",
+          "properties": {
+            "subnet": "rab"
+          }
+        },
+        {
+          "content": "Das Deutschlandticket und Fahrscheine des bwtarifs gelten auf der Fähre nur, wenn man mit dem Bus auf das Schiff gelangt und es mit dem Bus wieder verlässt. Während der Überfahrt ist ein vorübergehender Ausstieg zulässig.",
+          "providerCode": "1I",
+          "type": "Timetable",
+          "properties": {
+            "subnet": "rab"
+          }
+        },
+        {
+          "content": "„Die Linien 700 und 7394 hält NICHT an den Bushaltestellen Meersburg Fähre und Konstanz Staad/Autofähre.“",
+          "providerCode": "01",
+          "type": "Timetable",
+          "properties": {
+            "subnet": "rab"
+          }
+        }
+      ],
+      "properties": {
+        "AVMSTripID": "80:03:4700590"
+      }
+    },
+    {
+      "realtimeStatus": [
+        "MONITORED"
+      ],
+      "isRealtimeControlled": true,
+      "location": {
+        "id": "de:08436:8043:0:2",
+        "isGlobalId": true,
+        "name": "Ravensburg Meersburger Brücke",
+        "type": "platform",
+        "coord": [
+          5929372,
+          1069311
+        ],
+        "properties": {
+          "stopId": "7708043",
+          "area": "0",
+          "platform": "2"
+        },
+        "parent": {
+          "id": "de:08436:8043",
+          "isGlobalId": true,
+          "name": "Ravensburg Meersburger Brücke",
+          "disassembledName": "Meersburger Brücke",
+          "type": "stop",
+          "parent": {
+            "name": "Ravensburg",
+            "type": "locality"
+          },
+          "properties": {
+            "stopId": "7708043"
+          }
+        }
+      },
+      "departureTimePlanned": "2026-04-12T10:46:00Z",
+      "departureTimeBaseTimetable": "2026-04-12T10:46:00Z",
+      "departureTimeEstimated": "2026-04-12T10:46:00Z",
+      "transportation": {
+        "id": "rab:14301: :R:26a",
+        "name": "Stadtbus RV/WGT 1",
+        "disassembledName": "1",
+        "number": "1",
+        "product": {
+          "id": 9,
+          "class": 5,
+          "name": "Stadtbus RV/WGT",
+          "iconId": 3
+        },
+        "operator": {
+          "code": "RAB",
+          "id": "RAB",
+          "name": "rab"
+        },
+        "destination": {
+          "id": "7708001",
+          "name": "Baindt Marsweiler",
+          "type": "stop"
+        },
+        "properties": {
+          "isSTT": true,
+          "tripCode": 271,
+          "lineDisplay": "LINE",
+          "globalId": "de:bodo:09001_:"
+        },
+        "origin": {
+          "id": "7708155",
+          "name": "Ravensburg, Hofgut",
+          "type": "stop"
+        }
+      },
+      "infos": [
+        {
+          "priority": "high",
+          "id": "ems-11882",
+          "version": 6,
+          "type": "stopInfo",
+          "properties": {
+            "publisher": "ems.comm.addinfo",
+            "infoType": "stopInfo",
+            "sourceSystemID": "live_efa_config"
+          },
+          "infoLinks": [
+            {
+              "urlText": "Haltestellen Ravensburg Meersburger Brücke\n        , Marienplatz\n        , Meersburger Brücke\n        , Mühlbruck\n        und Heilig-Geist-Spital\n: Haltausfall durch Baustelle",
+              "url": "http://nohost",
+              "content": "An den Haltestellen <b>Ravensburg Meersburger Brücke</b>\n            ,<b>Marienplatz</b>\n            ,<b>Meersburger Brücke</b>\n            ,<b>Mühlbruck</b>\n            und <b>Heilig-Geist-Spital</b>\n    kommt es\n\tvom 07. März 2026 ab 04:30 Uhr bis 01. September 2026 um 02:00 Uhr\n\tzu <b>einem Haltausfall</b> wegen einer Baustelle.<br>\n<div>Auf Grund einer Bauma&szlig;nahme ist die Meersburger Br&uuml;cke halbseitig in Fahrtrichtung stadtausw&auml;rts vom 07.03.2026 Betriebsbeginn bis vsl. 31.08.2026 gesperrt.</div>\n<div>Es entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital. In Fahrtrichtung stadtausw&auml;rts Meersburger Br&uuml;cke und M&uuml;hlbruck.</div>\n<div>Auf der Linie 1 / 700 / 710 / R70 bestehen Baustellenfahrpl&auml;ne!!!</div>",
+              "subtitle": "Haltestellen Ravensburg Meersburger Brücke\n        , Marienplatz\n        , Meersburger Brücke\n        , Mühlbruck\n        und Heilig-Geist-Spital\n: Haltausfall durch Baustelle",
+              "htmlText": "An den Haltestellen <b>Ravensburg Meersburger Brücke</b>\n            ,<b>Marienplatz</b>\n            ,<b>Meersburger Brücke</b>\n            ,<b>Mühlbruck</b>\n            und <b>Heilig-Geist-Spital</b>\n    kommt es\n\tvom 07. März 2026 ab 04:30 Uhr bis 01. September 2026 um 02:00 Uhr\n\tzu <b>einem Haltausfall</b> wegen einer Baustelle.<br>\n<div>Auf Grund einer Bauma&szlig;nahme ist die Meersburger Br&uuml;cke halbseitig in Fahrtrichtung stadtausw&auml;rts vom 07.03.2026 Betriebsbeginn bis vsl. 31.08.2026 gesperrt.</div>\n<div>Es entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital. In Fahrtrichtung stadtausw&auml;rts Meersburger Br&uuml;cke und M&uuml;hlbruck.</div>\n<div>Auf der Linie 1 / 700 / 710 / R70 bestehen Baustellenfahrpl&auml;ne!!!</div>"
+            }
+          ]
+        },
+        {
+          "priority": "high",
+          "id": "ems-11850",
+          "version": 79707,
+          "type": "lineInfo",
+          "properties": {
+            "publisher": "ems.comm.addinfo",
+            "infoType": "lineInfo",
+            "sourceSystemID": "live_efa_config"
+          },
+          "infoLinks": [
+            {
+              "urlText": "Linien 1, 3, 4, 700, 710 und R70: Haltausfall wegen einer Baustelle",
+              "url": "http://nohost",
+              "content": "Zwischen <b>Ravensburg Bahnhof</b> und <b>Ravensburg Mühlbruck</b> kommt es\nvom 07. März 2026 ab 00:00 Uhr bis 31. August 2026 um 23:59 Uhr\nzu <b>einem Haltausfall</b> wegen einer Baustelle. Betroffen <b>sind die Linien 1, 3, 4, 700, 710 und R70</b>.<br>\n\n</br>\n<div>Aufgrund der halbseitigen Sperrung der Meersburger Br&uuml;cke in Ravensburg (07.03.&ndash;31.08.2026) fahren die Linien 1 / 700 / 710 ab Ravensburg Bahnhof stadtausw&auml;rts ab Bussteig 10 &uuml;ber Am Alten Gaswerk &ndash; Metzgerstra&szlig;e &ndash; Br&uuml;hlstra&szlig;e zur Ersatzhaltestelle M&uuml;hlbruck; die Haltestellen Marienplatz, Heilig-Geist-Spital und Meersburger Br&uuml;cke entfallen.&nbsp;</div>\n<div>Bitte beachten Sie die fr&uuml;heren Abfahrtszeiten aufgrund der Umleitungen und die Durchsagen im Bus. Jene sind in der online Fahrplanauskunft bereits eingespielt.<br />Die Linie 4 / R70 wird stadtausw&auml;rts umgeleitet, R70 h&auml;lt an M&uuml;hlbruck, Linie 4 weiter nach Plan.<br />Stadteinw&auml;rts entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital, daf&uuml;r wird die Ersatzhalt in der Karlstra&szlig;e bedient.&nbsp;</div>\n<div>Die Ersatzfahrpl&auml;ne finden sie unter: <a href=\"https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html\" target=\"_blank\" rel=\"noopener\">https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html</a></div>\n<div>Der aktualisierten Steigbelegungsplan am Bahnhof Ravensburg w&auml;hren der Sperrung der Meersburger Br&uuml;cke finden Sie unter: <a href=\"https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/\" target=\"_blank\" rel=\"noopener\">https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/</a></div>",
+              "subtitle": "Linien 1, 3, 4, 700, 710 und R70: Haltausfall wegen einer Baustelle",
+              "htmlText": "Zwischen <b>Ravensburg Bahnhof</b> und <b>Ravensburg Mühlbruck</b> kommt es\nvom 07. März 2026 ab 00:00 Uhr bis 31. August 2026 um 23:59 Uhr\nzu <b>einem Haltausfall</b> wegen einer Baustelle. Betroffen <b>sind die Linien 1, 3, 4, 700, 710 und R70</b>.<br>\n\n</br>\n<div>Aufgrund der halbseitigen Sperrung der Meersburger Br&uuml;cke in Ravensburg (07.03.&ndash;31.08.2026) fahren die Linien 1 / 700 / 710 ab Ravensburg Bahnhof stadtausw&auml;rts ab Bussteig 10 &uuml;ber Am Alten Gaswerk &ndash; Metzgerstra&szlig;e &ndash; Br&uuml;hlstra&szlig;e zur Ersatzhaltestelle M&uuml;hlbruck; die Haltestellen Marienplatz, Heilig-Geist-Spital und Meersburger Br&uuml;cke entfallen.&nbsp;</div>\n<div>Bitte beachten Sie die fr&uuml;heren Abfahrtszeiten aufgrund der Umleitungen und die Durchsagen im Bus. Jene sind in der online Fahrplanauskunft bereits eingespielt.<br />Die Linie 4 / R70 wird stadtausw&auml;rts umgeleitet, R70 h&auml;lt an M&uuml;hlbruck, Linie 4 weiter nach Plan.<br />Stadteinw&auml;rts entfallen die Haltestellen Marienplatz und Heilig-Geist-Spital, daf&uuml;r wird die Ersatzhalt in der Karlstra&szlig;e bedient.&nbsp;</div>\n<div>Die Ersatzfahrpl&auml;ne finden sie unter: <a href=\"https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html\" target=\"_blank\" rel=\"noopener\">https://www.bodo.de/aktuelles/detail/ravensburg-aenderungen-beim-stadt-und-regionalbus.html</a></div>\n<div>Der aktualisierten Steigbelegungsplan am Bahnhof Ravensburg w&auml;hren der Sperrung der Meersburger Br&uuml;cke finden Sie unter: <a href=\"https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/\" target=\"_blank\" rel=\"noopener\">https://www.stadtbus-rv-wgt.de/bus-bahnhof/sb_umsteigeuebersicht_zob-2/</a></div>"
+            }
+          ]
+        }
+      ],
+      "hints": [
+        {
+          "content": "Behindertengerecht",
+          "providerCode": "1",
+          "type": "Timetable",
+          "properties": {
+            "subnet": "rab"
+          }
+        },
+        {
+          "content": "Niederflurbus, für Rollstuhlfahrer geeignet",
+          "providerCode": "1a",
+          "type": "Timetable",
+          "properties": {
+            "subnet": "rab"
+          }
+        }
+      ],
+      "properties": {
+        "AVMSTripID": "80:01:4301218"
+      }
+    }
+  ]
+}
