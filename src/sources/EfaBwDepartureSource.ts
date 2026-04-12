@@ -15,7 +15,7 @@ export class EfaBwDepartureSource implements DataSource {
 
     async fetchData(): Promise<string> {
         const today = new Date();
-        const date = today.toISOString().slice(0, 10).replace(/-/g, ""); // "2026-04-12" -> "20260412"
+        const date = today.toISOString().slice(0, 10).replaceAll("-", ""); // "2026-04-12" -> "20260412"
 
         const requestUrl = `${this.BASE_URL}/XML_DM_REQUEST?type_dm=stopID&name_dm=${this.stopId}&outputFormat=rapidJSON&mode=direct&useRealtime=1&itdDateTimeDepArr=dep&limit=50&itdTime=${this.timeOfDeparture}&itdDate=${date}`;
         try {
