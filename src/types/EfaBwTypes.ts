@@ -7,7 +7,7 @@ export interface StopEvent {
     }
     departureTimePlanned: string
     departureTimeEstimated?: string
-    infos: Info[]
+    infos?: Info[]
 }
 
 export interface Info {

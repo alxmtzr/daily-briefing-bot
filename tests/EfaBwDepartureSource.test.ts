@@ -10,7 +10,7 @@ vi.spyOn(console, "error").mockImplementation(() => {});
 const makeStopEvent = (overrides: Partial<StopEvent> = {}): StopEvent => ({
     transportation: {
         number: "700",
-        destination: { name: "Konstanz" }
+        destination: { name: "Konstanz Bahnhof" }
     },
     departureTimePlanned: "2026-04-14T05:35:00Z",     // 07:35 Berlin time
     departureTimeEstimated: "2026-04-14T05:35:00Z",
@@ -31,7 +31,7 @@ describe("EfaBwDepartureSource", () => {
 
         const result = await source.fetchData();
 
-        expect(result).toContain("Line 700 → Konstanz");
+        expect(result).toContain("Line 700 → Konstanz Bahnhof");
         expect(result).toContain("07:35");
         expect(result).toContain("on time");
     });
@@ -127,6 +127,17 @@ describe("EfaBwDepartureSource", () => {
         vi.mocked(axios.get).mockRejectedValue(new Error("Network Error"));
 
         await expect(source.fetchData()).rejects.toThrow("Network Error");
+    });
+
+    it("accepts alternative destination for same line number", async () => {
+        const event = makeStopEvent({
+            transportation: { number: "710", destination: { name: "Markdorf Bahnhof" } }
+        });
+        vi.mocked(axios.get).mockResolvedValue({ data: { stopEvents: [event] } });
+
+        const result = await source.fetchData();
+
+        expect(result).toContain("Line 710 → Markdorf Bahnhof");
     });
 
     it("works with BUS_LINES_TOWARDS_HOME", async () => {

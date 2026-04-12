@@ -9,7 +9,7 @@ export class EfaBwDepartureSource implements DataSource {
     constructor(
         public name: string, 
         private readonly stopId: string,
-        private readonly BUS_LINES: Record<string, string>,
+        private readonly BUS_LINES: Record<string, readonly string[]>,
         private readonly timeOfDeparture: string
     ) {}
 
@@ -17,7 +17,7 @@ export class EfaBwDepartureSource implements DataSource {
         const today = new Date();
         const date = today.toISOString().slice(0, 10).replace(/-/g, ""); // "2026-04-12" -> "20260412"
 
-        const requestUrl = `${this.BASE_URL}/XML_DM_REQUEST?type_dm=stopID&name_dm=${this.stopId}&outputFormat=rapidJSON&mode=direct&useRealtime=1&itdDateTimeDepArr=dep&limit=20&itdTime=${this.timeOfDeparture}&itdDate=${date}`;
+        const requestUrl = `${this.BASE_URL}/XML_DM_REQUEST?type_dm=stopID&name_dm=${this.stopId}&outputFormat=rapidJSON&mode=direct&useRealtime=1&itdDateTimeDepArr=dep&limit=50&itdTime=${this.timeOfDeparture}&itdDate=${date}`;
         try {
             const response = await axios.get(requestUrl);
             return this.extractRelevantData(response.data);
@@ -31,7 +31,7 @@ export class EfaBwDepartureSource implements DataSource {
         const filtered = responseData.stopEvents
                             .filter(e => 
                                 e.transportation.number in this.BUS_LINES &&
-                                Object.values(this.BUS_LINES).includes(e.transportation.destination.name))
+                                this.BUS_LINES[e.transportation.number].includes(e.transportation.destination.name))
                             .map(e => {
                                 const planned = e.departureTimePlanned        // "2026-04-12T07:35:00Z"
                                 const estimated = e.departureTimeEstimated    // "2026-04-12T07:38:00Z"
@@ -59,7 +59,7 @@ export class EfaBwDepartureSource implements DataSource {
     }
 
     private searchForReason(stopEvents: StopEvent[]): string {
-        const allInfos = stopEvents.flatMap(e => e.infos);
+        const allInfos = stopEvents.flatMap(e => e.infos ?? []);
         const uniqueInfos = new Map(allInfos.map(info => [info.id, info]));
 
         const notices = [...uniqueInfos.values()]
