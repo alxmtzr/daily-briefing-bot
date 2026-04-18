@@ -4,7 +4,7 @@
   "description": "Automates daily tasks by collecting data from multiple sources, summarizing it with AI, and sending updates via Telegram.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && cp -r src/resources dist/resources",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
     "typecheck": "tsc --noEmit",

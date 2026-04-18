@@ -46,6 +46,8 @@ export class Pipeline {
         const summary = await withRetry(() => this.aiProvider.summarize(aggregated, this.systemPrompt));
         const date = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
         const header = `📋 <b>${this.runLabel} Briefing — ${date}</b>\n\n`;
-        await this.notifier.notify(header + summary);
+        const finalMessage = header + summary;
+        console.log("Briefing:\n", finalMessage);
+        await this.notifier.notify(finalMessage);
     }
 }
