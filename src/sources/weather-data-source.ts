@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DataSource } from "../interfaces/DataSource";
+import { DataSource } from "../interfaces/data-source";
 
 interface CurrentWeather {
     temperature_2m: number;

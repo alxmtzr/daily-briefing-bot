@@ -1,6 +1,6 @@
 import { vi, it, describe, expect, beforeEach } from "vitest";
 import axios from "axios";
-import { WeatherDataSource } from "../src/sources/WeatherDataSource";
+import { WeatherDataSource } from "../src/sources/weather-data-source";
 
 vi.mock("axios");
 vi.spyOn(console, "error").mockImplementation(() => { });

@@ -1,8 +1,8 @@
 import { vi, it, describe, expect, beforeEach } from "vitest";
 import axios from "axios";
-import { EfaBwDepartureSource } from "../src/sources/EfaBwDepartureSource";
+import { EfaBwDepartureSource } from "../src/sources/efa-bw-departure-source";
 import { BUS_LINES_TOWARDS_WORK, BUS_LINES_TOWARDS_HOME } from "../src/common/constants";
-import { StopEvent } from "../src/types/EfaBwTypes";
+import { StopEvent } from "../src/types/efa-bw-types";
 
 vi.mock("axios");
 vi.spyOn(console, "error").mockImplementation(() => {});

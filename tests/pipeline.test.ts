@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from "vitest";
 import { Pipeline } from "../src/pipeline";
-import { DataSource } from "../src/interfaces/DataSource";
-import { AIProvider } from "../src/interfaces/AIProvider";
-import { Notifier } from "../src/interfaces/Notifier";
+import { DataSource } from "../src/interfaces/data-source";
+import { AIProvider } from "../src/interfaces/ai-provider";
+import { Notifier } from "../src/interfaces/notifier";
 
 vi.useFakeTimers();
 
