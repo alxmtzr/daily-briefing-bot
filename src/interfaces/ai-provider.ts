@@ -1,3 +1,3 @@
 export interface AIProvider {
-    summarize(input: string): Promise<string>;
+    summarize(input: string, systemPrompt: string): Promise<string>;
 }

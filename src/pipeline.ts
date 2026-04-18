@@ -20,7 +20,9 @@ export class Pipeline {
     constructor(
         private readonly sources: DataSource[],
         private readonly aiProvider: AIProvider,
-        private readonly notifier: Notifier
+        private readonly notifier: Notifier,
+        private readonly systemPrompt: string,
+        private readonly runLabel: string
     ) {}
 
     async run(): Promise<void> {
@@ -36,8 +38,8 @@ export class Pipeline {
             }
         }
 
-        const aggregated = results.join("\n\n");
-        const summary = await this.aiProvider.summarize(aggregated);
+        const aggregated = `Run: ${this.runLabel}\n\n` + results.join("\n\n");
+        const summary = await this.aiProvider.summarize(aggregated, this.systemPrompt);
         await this.notifier.notify(summary);
     }
 }

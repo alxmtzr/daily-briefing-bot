@@ -26,11 +26,12 @@ describe("Pipeline", () => {
         const ai = makeAiProvider("Everything looks good today.");
         const notifier = makeNotifier();
 
-        const pipeline = new Pipeline([source1, source2], ai, notifier);
+        const pipeline = new Pipeline([source1, source2], ai, notifier, "You are a briefing assistant.", "Morning");
         await pipeline.run();
 
         expect(ai.summarize).toHaveBeenCalledWith(
-            "[Transport]\nLine 700 on time\n\n[Weather]\nSunny, 18°C"
+            "Run: Morning\n\n[Transport]\nLine 700 on time\n\n[Weather]\nSunny, 18°C",
+            "You are a briefing assistant."
         );
         expect(notifier.notify).toHaveBeenCalledWith("Everything looks good today.");
     });
@@ -45,13 +46,13 @@ describe("Pipeline", () => {
         const ai = makeAiProvider();
         const notifier = makeNotifier();
 
-        const pipeline = new Pipeline([source], ai, notifier);
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
         const runPromise = pipeline.run();
         await vi.runAllTimersAsync();
         await runPromise;
 
         expect(source.fetchData).toHaveBeenCalledTimes(2);
-        expect(ai.summarize).toHaveBeenCalledWith("[Flaky]\nData on retry");
+        expect(ai.summarize).toHaveBeenCalledWith("Run: Morning\n\n[Flaky]\nData on retry", "prompt");
     });
 
     it("logs error and continues when source fails all retries", async () => {
@@ -63,7 +64,7 @@ describe("Pipeline", () => {
         const notifier = makeNotifier();
         const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
-        const pipeline = new Pipeline([source], ai, notifier);
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Afternoon");
         const runPromise = pipeline.run();
         await vi.runAllTimersAsync();
         await runPromise;
@@ -72,7 +73,7 @@ describe("Pipeline", () => {
             expect.stringContaining('"Broken"'),
             expect.any(Error)
         );
-        expect(ai.summarize).toHaveBeenCalledWith("[Broken]\nFailed to fetch data.");
+        expect(ai.summarize).toHaveBeenCalledWith("Run: Afternoon\n\n[Broken]\nFailed to fetch data.", "prompt");
         consoleSpy.mockRestore();
     });
 });
