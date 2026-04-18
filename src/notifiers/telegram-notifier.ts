@@ -20,6 +20,6 @@ export class TelegramNotifier implements Notifier {
             chat_id: this.chatId,
             text: message,
             parse_mode: "HTML",
-        });
+        }, { timeout: 10000 });
     }
 }

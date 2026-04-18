@@ -1,7 +1,7 @@
 import { DataSource } from "./interfaces/data-source";
 import { AIProvider } from "./interfaces/ai-provider";
 import { Notifier } from "./interfaces/notifier";
-import { config } from "./config";
+import { Config } from "./config";
 
 async function withRetry<T>(
     fn: () => Promise<T>,
@@ -23,7 +23,8 @@ export class Pipeline {
         private readonly aiProvider: AIProvider,
         private readonly notifier: Notifier,
         private readonly systemPrompt: string,
-        private readonly runLabel: string
+        private readonly runLabel: string,
+        private readonly config: Config
     ) {}
 
     async run(): Promise<void> {
@@ -32,7 +33,7 @@ export class Pipeline {
         for (const source of this.sources) {
             try {
                 const data = await withRetry(() => source.fetchData());
-                if (config.LOG_API_RESPONSES) {
+                if (this.config.LOG_API_RESPONSES) {
                     console.log(`[${source.name}] raw response:\n${data}`);
                 }
                 results.push(`[${source.name}]\n${data}`);

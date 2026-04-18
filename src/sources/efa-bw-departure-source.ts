@@ -9,7 +9,7 @@ export class EfaBwDepartureSource implements DataSource {
     constructor(
         public name: string, 
         private readonly stopId: string,
-        private readonly BUS_LINES: Record<string, readonly string[]>,
+        private readonly busLines: Record<string, readonly string[]>,
         private readonly timeOfDeparture: string
     ) {}
 
@@ -18,15 +18,15 @@ export class EfaBwDepartureSource implements DataSource {
         const date = today.toISOString().slice(0, 10).replaceAll("-", ""); // "2026-04-12" -> "20260412"
 
         const requestUrl = `${this.BASE_URL}/XML_DM_REQUEST?type_dm=stopID&name_dm=${this.stopId}&outputFormat=rapidJSON&mode=direct&useRealtime=1&itdDateTimeDepArr=dep&limit=50&itdTime=${this.timeOfDeparture}&itdDate=${date}`;
-        const response = await axios.get(requestUrl);
+        const response = await axios.get(requestUrl, { timeout: 10000 });
         return this.extractRelevantData(response.data);
     }
 
     private extractRelevantData(responseData: { stopEvents: StopEvent[] }): string {
         const filtered = responseData.stopEvents
                             .filter(e => 
-                                e.transportation.number in this.BUS_LINES &&
-                                this.BUS_LINES[e.transportation.number].includes(e.transportation.destination.name))
+                                e.transportation.number in this.busLines &&
+                                this.busLines[e.transportation.number].includes(e.transportation.destination.name))
                             .map(e => {
                                 const planned = e.departureTimePlanned        // "2026-04-12T07:35:00Z"
                                 const estimated = e.departureTimeEstimated    // "2026-04-12T07:38:00Z"

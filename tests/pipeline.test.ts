@@ -3,9 +3,11 @@ import { Pipeline } from "../src/pipeline";
 import { DataSource } from "../src/interfaces/data-source";
 import { AIProvider } from "../src/interfaces/ai-provider";
 import { Notifier } from "../src/interfaces/notifier";
-import { config } from "../src/config";
+import { Config } from "../src/config";
 
 vi.useFakeTimers();
+
+const defaultConfig: Config = { AI_ENABLED: true, NOTIFIER_ENABLED: true, LOG_API_RESPONSES: false, FORCE_COMMUTING_DAY: false };
 
 const makeSource = (name: string, data: string): DataSource => ({
     name,
@@ -28,7 +30,7 @@ describe("Pipeline", () => {
         const ai = makeAiProvider("Everything looks good today.");
         const notifier = makeNotifier();
 
-        const pipeline = new Pipeline([source1, source2], ai, notifier, "You are a briefing assistant.", "Morning");
+        const pipeline = new Pipeline([source1, source2], ai, notifier, "You are a briefing assistant.", "Morning", defaultConfig);
         await pipeline.run();
 
         expect(ai.summarize).toHaveBeenCalledWith(
@@ -50,7 +52,7 @@ describe("Pipeline", () => {
         const ai = makeAiProvider();
         const notifier = makeNotifier();
 
-        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning", defaultConfig);
         const runPromise = pipeline.run();
         await vi.runAllTimersAsync();
         await runPromise;
@@ -68,7 +70,7 @@ describe("Pipeline", () => {
         };
         const notifier = makeNotifier();
 
-        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning", defaultConfig);
         const runPromise = pipeline.run();
         await vi.runAllTimersAsync();
         await runPromise;
@@ -84,7 +86,7 @@ describe("Pipeline", () => {
         };
         const notifier = makeNotifier();
 
-        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning", defaultConfig);
         const runPromise = pipeline.run();
         const assertion = expect(runPromise).rejects.toThrow("503 Service Unavailable");
         await vi.runAllTimersAsync();
@@ -102,7 +104,7 @@ describe("Pipeline", () => {
         const notifier = makeNotifier();
         const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
-        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Afternoon");
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Afternoon", defaultConfig);
         const runPromise = pipeline.run();
         await vi.runAllTimersAsync();
         await runPromise;
@@ -121,10 +123,9 @@ describe("Pipeline", () => {
         const notifier = makeNotifier();
         const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
 
-        config.LOG_API_RESPONSES = true;
-        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning", { ...defaultConfig, LOG_API_RESPONSES: true });
         await pipeline.run();
-        config.LOG_API_RESPONSES = false;
+
 
         expect(consoleSpy).toHaveBeenCalledWith("[Weather] raw response:\nSunny, 18°C");
         consoleSpy.mockRestore();
