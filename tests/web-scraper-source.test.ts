@@ -1,6 +1,6 @@
 import { vi, it, describe, expect } from "vitest";
 import axios from "axios";
-import { WebScraperSource } from "../src/sources/WebScraperSource";
+import { WebScraperSource } from "../src/sources/web-scraper-source";
 
 vi.mock("axios");
 vi.spyOn(console, 'error').mockImplementation(() => {}); // Suppress console.error output during tests

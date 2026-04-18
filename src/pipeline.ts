@@ -1,6 +1,6 @@
-import { DataSource } from "./interfaces/DataSource";
-import { AIProvider } from "./interfaces/AIProvider";
-import { Notifier } from "./interfaces/Notifier";
+import { DataSource } from "./interfaces/data-source";
+import { AIProvider } from "./interfaces/ai-provider";
+import { Notifier } from "./interfaces/notifier";
 
 async function withRetry<T>(
     fn: () => Promise<T>,

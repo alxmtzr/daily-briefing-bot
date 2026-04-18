@@ -1,4 +1,4 @@
-import { DataSource } from "../interfaces/DataSource";
+import { DataSource } from "../interfaces/data-source";
 import axios from "axios";
 import * as cheerio from "cheerio";
 

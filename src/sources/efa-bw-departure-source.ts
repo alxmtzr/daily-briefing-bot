@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { DataSource } from "../interfaces/DataSource";
-import { StopEvent } from "../types/EfaBwTypes";
+import { DataSource } from "../interfaces/data-source";
+import { StopEvent } from "../types/efa-bw-types";
 
 export class EfaBwDepartureSource implements DataSource {
     private readonly BASE_URL : string = "https://www.efa-bw.de/nvbw";

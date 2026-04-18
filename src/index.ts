@@ -1,15 +1,18 @@
 import "dotenv/config";
-import { EfaBwDepartureSource } from "./sources/EfaBwDepartureSource";
-import { BUS_LINES_TOWARDS_HOME, BUS_LINES_TOWARDS_WORK } from "./common/constants";
+import { EfaBwDepartureSource } from "./sources/efa-bw-departure-source";
+import { BUS_LINES_TOWARDS_HOME, BUS_LINES_TOWARDS_WORK, LOCATION_HOME, LOCATION_WORK, STOP_NAMES } from "./common/constants";
 import { Pipeline } from "./pipeline";
+import { WeatherDataSource } from "./sources/weather-data-source";
 
 export const main = async (): Promise<void> => {
     console.log("Daily Briefing Bot started.");
 
     const sources = [
-        new EfaBwDepartureSource("Towards work - Meersburger Brücke", process.env.TRANSPORT_STOP_1!, BUS_LINES_TOWARDS_WORK, "0715"),
-        new EfaBwDepartureSource("Towards work (alternative stop) - Ravensburg Bahnhof", process.env.TRANSPORT_STOP_ALTERNATIVE!, BUS_LINES_TOWARDS_WORK, "0715"),
-        new EfaBwDepartureSource("Towards home - Markdorf Gewerbegebiet", process.env.TRANSPORT_STOP_2!, BUS_LINES_TOWARDS_HOME, "1615"),
+        new EfaBwDepartureSource(STOP_NAMES.TOWARDS_WORK_PRIMARY, process.env.TRANSPORT_STOP_1!, BUS_LINES_TOWARDS_WORK, "0715"),
+        new EfaBwDepartureSource(STOP_NAMES.TOWARDS_WORK_ALTERNATIVE, process.env.TRANSPORT_STOP_ALTERNATIVE!, BUS_LINES_TOWARDS_WORK, "0715"),
+        new EfaBwDepartureSource(STOP_NAMES.TOWARDS_HOME, process.env.TRANSPORT_STOP_2!, BUS_LINES_TOWARDS_HOME, "1615"),
+        new WeatherDataSource(LOCATION_HOME.name, LOCATION_HOME.lat, LOCATION_HOME.lon),
+        new WeatherDataSource(LOCATION_WORK.name, LOCATION_WORK.lat, LOCATION_WORK.lon),
     ];
 
     // TODO: replace with real implementations once GeminiProvider and TelegramNotifier are built
