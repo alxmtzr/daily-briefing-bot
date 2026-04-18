@@ -37,7 +37,8 @@ describe("TelegramNotifier", () => {
                 chat_id: "test-chat-id",
                 text: "Hello, <b>world</b>!",
                 parse_mode: "HTML",
-            }
+            },
+            { timeout: 10000 }
         );
     });
 

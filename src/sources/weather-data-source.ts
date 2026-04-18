@@ -39,13 +39,8 @@ export class WeatherDataSource implements DataSource {
             `&timezone=Europe%2FBerlin` +
             `&forecast_days=1`;
 
-        try {
-            const response = await axios.get<OpenMeteoResponse>(requestUrl);
-            return this.extractRelevantData(response.data);
-        } catch (error) {
-            console.error(`Error fetching weather data from ${requestUrl}:`, error);
-            throw error;
-        }
+        const response = await axios.get<OpenMeteoResponse>(requestUrl, { timeout: 10000 });
+        return this.extractRelevantData(response.data);
     }
 
     private extractRelevantData(data: OpenMeteoResponse): string {

@@ -32,8 +32,18 @@ export const main = async (): Promise<void> => {
         : { notify: async (_message: string) => {} };
 
     const runLabel = process.env.RUN_LABEL ?? "Unknown";
-    const pipeline = new Pipeline(sources, aiProvider, notifier, SYSTEM_PROMPT, runLabel);
-    await pipeline.run();
+    const pipeline = new Pipeline(sources, aiProvider, notifier, SYSTEM_PROMPT, runLabel, config);
+
+    try {
+        await pipeline.run();
+    } catch (error) {
+        console.error("Pipeline failed:", error);
+        if (config.NOTIFIER_ENABLED) {
+            const errorNotifier = new TelegramNotifier();
+            await errorNotifier.notify(`⚠️ <b>Briefing failed</b>\nThe ${runLabel} briefing could not be delivered. Please check the logs.`);
+        }
+        throw error;
+    }
 };
 
 // istanbul ignore next

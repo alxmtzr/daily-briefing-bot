@@ -17,7 +17,7 @@ describe("WebScraperSource", () => {
         const data = await source.fetchData();
 
         expect(data).toBe(mockData);
-        expect(axios.get).toHaveBeenCalledWith(mockUrl);
+        expect(axios.get).toHaveBeenCalledWith(mockUrl, { timeout: 10000 });
     });
 
     it("handles fetch errors", async () => {
@@ -27,14 +27,16 @@ describe("WebScraperSource", () => {
         const source = new WebScraperSource("Test Source", mockUrl, "");
         
         await expect(source.fetchData()).rejects.toThrow("Network Error");
-        expect(axios.get).toHaveBeenCalledWith(mockUrl);
+        expect(axios.get).toHaveBeenCalledWith(mockUrl, { timeout: 10000 });
     });
 
-    it("extracts relevant data correctly", () => {
+    it("extracts relevant data correctly", async () => {
         const html = `<html><body><div id="test">Extracted Data</div></body></html>`;
-        const source = new WebScraperSource("Test Source", mockUrl, mockSelector);
-        const extractedData = source.extractRelevantData(html);
+        vi.mocked(axios.get).mockResolvedValue({ data: html });
 
-        expect(extractedData).toBe("Extracted Data");
+        const source = new WebScraperSource("Test Source", mockUrl, mockSelector);
+        const result = await source.fetchData();
+
+        expect(result).toBe("Extracted Data");
     });
 });
