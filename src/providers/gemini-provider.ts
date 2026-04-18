@@ -9,7 +9,7 @@ export class GeminiProvider implements AIProvider {
         if (!apiKey) throw new Error("AI_API_KEY is not set");
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        this.model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+        this.model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
     }
 
     async summarize(data: string, systemPrompt: string): Promise<string> {

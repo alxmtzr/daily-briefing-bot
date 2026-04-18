@@ -18,13 +18,8 @@ export class EfaBwDepartureSource implements DataSource {
         const date = today.toISOString().slice(0, 10).replaceAll("-", ""); // "2026-04-12" -> "20260412"
 
         const requestUrl = `${this.BASE_URL}/XML_DM_REQUEST?type_dm=stopID&name_dm=${this.stopId}&outputFormat=rapidJSON&mode=direct&useRealtime=1&itdDateTimeDepArr=dep&limit=50&itdTime=${this.timeOfDeparture}&itdDate=${date}`;
-        try {
-            const response = await axios.get(requestUrl);
-            return this.extractRelevantData(response.data);
-        } catch (error) {
-            console.error(`Error fetching data from ${requestUrl}:`, error);
-            throw error;
-        }
+        const response = await axios.get(requestUrl);
+        return this.extractRelevantData(response.data);
     }
 
     private extractRelevantData(responseData: { stopEvents: StopEvent[] }): string {

@@ -55,6 +55,40 @@ describe("Pipeline", () => {
         expect(ai.summarize).toHaveBeenCalledWith("Run: Morning\n\n[Flaky]\nData on retry", "prompt");
     });
 
+    it("retries AI provider on failure and succeeds on second attempt", async () => {
+        const source = makeSource("Weather", "Sunny");
+        const ai: AIProvider = {
+            summarize: vi.fn()
+                .mockRejectedValueOnce(new Error("503 Service Unavailable"))
+                .mockResolvedValue("Looks good today."),
+        };
+        const notifier = makeNotifier();
+
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
+        const runPromise = pipeline.run();
+        await vi.runAllTimersAsync();
+        await runPromise;
+
+        expect(ai.summarize).toHaveBeenCalledTimes(2);
+        expect(notifier.notify).toHaveBeenCalledWith("Looks good today.");
+    });
+
+    it("throws when AI provider fails all retries", async () => {
+        const source = makeSource("Weather", "Sunny");
+        const ai: AIProvider = {
+            summarize: vi.fn().mockRejectedValue(new Error("503 Service Unavailable")),
+        };
+        const notifier = makeNotifier();
+
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
+        const runPromise = pipeline.run();
+        const assertion = expect(runPromise).rejects.toThrow("503 Service Unavailable");
+        await vi.runAllTimersAsync();
+        await assertion;
+
+        expect(ai.summarize).toHaveBeenCalledTimes(4); // 1 initial + 3 retries
+    });
+
     it("logs error and continues when source fails all retries", async () => {
         const source: DataSource = {
             name: "Broken",

@@ -34,7 +34,7 @@ describe("GeminiProvider", () => {
     it("initializes with the correct model", () => {
         const provider = new GeminiProvider();
         const instance = vi.mocked(GoogleGenerativeAI).mock.results[0].value;
-        expect(instance.getGenerativeModel).toHaveBeenCalledWith({ model: "gemini-2.0-flash" });
+        expect(instance.getGenerativeModel).toHaveBeenCalledWith({ model: "gemini-flash-latest" });
         expect(provider).toBeDefined();
     });
 

@@ -4,6 +4,10 @@ You will receive transport and weather data split into labeled sections, and a R
 - Morning run: focus on transport towards work
 - Afternoon run: focus on transport towards home
 
+Stop context:
+- "Meersburger Brücke" is the primary departure stop towards work. Always prefer departures from this stop.
+- "Ravensburg Bahnhof" is the fallback stop. Only mention it if Meersburger Brücke is unavailable or severely disrupted.
+
 Format your response using Telegram HTML. Use the following structure:
 
 If any section contains construction warnings or stop closures, include this block first:
