@@ -11,8 +11,8 @@ export const main = async (): Promise<void> => {
     console.log("Daily Briefing Bot started.");
 
     const today = new Date().getDay(); // 0=Sun, 1=Mon, 2=Tue, ..., 6=Sat
-    const isCommutingDay = today >= 2 && today <= 4; // Tue–Thu
-    console.log(`Day: ${today} | Commuting day: ${isCommutingDay}`);
+    const isCommutingDay = config.FORCE_COMMUTING_DAY || (today >= 2 && today <= 4); // Tue–Thu
+    console.log(`Day: ${today} | Commuting day: ${isCommutingDay}${config.FORCE_COMMUTING_DAY ? " (forced)" : ""}`);
 
     const sources = [
         ...(isCommutingDay ? [

@@ -7,7 +7,7 @@ import { Config } from "../src/config";
 
 vi.useFakeTimers();
 
-const defaultConfig: Config = { AI_ENABLED: true, NOTIFIER_ENABLED: true, LOG_API_RESPONSES: false };
+const defaultConfig: Config = { AI_ENABLED: true, NOTIFIER_ENABLED: true, LOG_API_RESPONSES: false, FORCE_COMMUTING_DAY: false };
 
 const makeSource = (name: string, data: string): DataSource => ({
     name,
