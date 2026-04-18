@@ -10,10 +10,16 @@ import { config } from "./config";
 export const main = async (): Promise<void> => {
     console.log("Daily Briefing Bot started.");
 
+    const today = new Date().getDay(); // 0=Sun, 1=Mon, 2=Tue, ..., 6=Sat
+    const isCommutingDay = today >= 2 && today <= 4; // Tue–Thu
+    console.log(`Day: ${today} | Commuting day: ${isCommutingDay}`);
+
     const sources = [
-        new EfaBwDepartureSource(STOP_NAMES.TOWARDS_WORK_PRIMARY, STOP_IDS.TOWARDS_WORK_PRIMARY, BUS_LINES_TOWARDS_WORK, "0715"),
-        new EfaBwDepartureSource(STOP_NAMES.TOWARDS_WORK_ALTERNATIVE, STOP_IDS.TOWARDS_WORK_ALTERNATIVE, BUS_LINES_TOWARDS_WORK, "0715"),
-        new EfaBwDepartureSource(STOP_NAMES.TOWARDS_HOME, STOP_IDS.TOWARDS_HOME, BUS_LINES_TOWARDS_HOME, "1615"),
+        ...(isCommutingDay ? [
+            new EfaBwDepartureSource(STOP_NAMES.TOWARDS_WORK_PRIMARY, STOP_IDS.TOWARDS_WORK_PRIMARY, BUS_LINES_TOWARDS_WORK, "0715"),
+            new EfaBwDepartureSource(STOP_NAMES.TOWARDS_WORK_ALTERNATIVE, STOP_IDS.TOWARDS_WORK_ALTERNATIVE, BUS_LINES_TOWARDS_WORK, "0715"),
+            new EfaBwDepartureSource(STOP_NAMES.TOWARDS_HOME, STOP_IDS.TOWARDS_HOME, BUS_LINES_TOWARDS_HOME, "1615"),
+        ] : []),
         new WeatherDataSource(LOCATION_HOME.name, LOCATION_HOME.lat, LOCATION_HOME.lon),
         new WeatherDataSource(LOCATION_WORK.name, LOCATION_WORK.lat, LOCATION_WORK.lon),
     ];
