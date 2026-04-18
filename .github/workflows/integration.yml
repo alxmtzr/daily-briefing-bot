@@ -13,6 +13,8 @@ jobs:
   integration:
     name: Run integration tests
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
 
     steps:
       - name: Check out repository
@@ -29,3 +31,13 @@ jobs:
 
       - name: Run integration tests
         run: npm run test:integration
+
+      - name: Create GitHub issue on failure
+        if: failure() && github.event_name == 'schedule'
+        run: |
+          gh issue create \
+            --title "Integration tests failed ($(date -u '+%Y-%m-%d'))" \
+            --body "The nightly integration tests failed. One or more external APIs may be unavailable or have changed.\n\n**Workflow run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --label "bug"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
