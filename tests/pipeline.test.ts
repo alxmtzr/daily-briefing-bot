@@ -3,6 +3,7 @@ import { Pipeline } from "../src/pipeline";
 import { DataSource } from "../src/interfaces/data-source";
 import { AIProvider } from "../src/interfaces/ai-provider";
 import { Notifier } from "../src/interfaces/notifier";
+import { config } from "../src/config";
 
 vi.useFakeTimers();
 
@@ -26,11 +27,12 @@ describe("Pipeline", () => {
         const ai = makeAiProvider("Everything looks good today.");
         const notifier = makeNotifier();
 
-        const pipeline = new Pipeline([source1, source2], ai, notifier);
+        const pipeline = new Pipeline([source1, source2], ai, notifier, "You are a briefing assistant.", "Morning");
         await pipeline.run();
 
         expect(ai.summarize).toHaveBeenCalledWith(
-            "[Transport]\nLine 700 on time\n\n[Weather]\nSunny, 18°C"
+            "Run: Morning\n\n[Transport]\nLine 700 on time\n\n[Weather]\nSunny, 18°C",
+            "You are a briefing assistant."
         );
         expect(notifier.notify).toHaveBeenCalledWith("Everything looks good today.");
     });
@@ -45,13 +47,47 @@ describe("Pipeline", () => {
         const ai = makeAiProvider();
         const notifier = makeNotifier();
 
-        const pipeline = new Pipeline([source], ai, notifier);
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
         const runPromise = pipeline.run();
         await vi.runAllTimersAsync();
         await runPromise;
 
         expect(source.fetchData).toHaveBeenCalledTimes(2);
-        expect(ai.summarize).toHaveBeenCalledWith("[Flaky]\nData on retry");
+        expect(ai.summarize).toHaveBeenCalledWith("Run: Morning\n\n[Flaky]\nData on retry", "prompt");
+    });
+
+    it("retries AI provider on failure and succeeds on second attempt", async () => {
+        const source = makeSource("Weather", "Sunny");
+        const ai: AIProvider = {
+            summarize: vi.fn()
+                .mockRejectedValueOnce(new Error("503 Service Unavailable"))
+                .mockResolvedValue("Looks good today."),
+        };
+        const notifier = makeNotifier();
+
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
+        const runPromise = pipeline.run();
+        await vi.runAllTimersAsync();
+        await runPromise;
+
+        expect(ai.summarize).toHaveBeenCalledTimes(2);
+        expect(notifier.notify).toHaveBeenCalledWith("Looks good today.");
+    });
+
+    it("throws when AI provider fails all retries", async () => {
+        const source = makeSource("Weather", "Sunny");
+        const ai: AIProvider = {
+            summarize: vi.fn().mockRejectedValue(new Error("503 Service Unavailable")),
+        };
+        const notifier = makeNotifier();
+
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
+        const runPromise = pipeline.run();
+        const assertion = expect(runPromise).rejects.toThrow("503 Service Unavailable");
+        await vi.runAllTimersAsync();
+        await assertion;
+
+        expect(ai.summarize).toHaveBeenCalledTimes(4); // 1 initial + 3 retries
     });
 
     it("logs error and continues when source fails all retries", async () => {
@@ -63,7 +99,7 @@ describe("Pipeline", () => {
         const notifier = makeNotifier();
         const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
-        const pipeline = new Pipeline([source], ai, notifier);
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Afternoon");
         const runPromise = pipeline.run();
         await vi.runAllTimersAsync();
         await runPromise;
@@ -72,7 +108,22 @@ describe("Pipeline", () => {
             expect.stringContaining('"Broken"'),
             expect.any(Error)
         );
-        expect(ai.summarize).toHaveBeenCalledWith("[Broken]\nFailed to fetch data.");
+        expect(ai.summarize).toHaveBeenCalledWith("Run: Afternoon\n\n[Broken]\nFailed to fetch data.", "prompt");
+        consoleSpy.mockRestore();
+    });
+
+    it("logs raw source response when LOG_API_RESPONSES is enabled", async () => {
+        const source = makeSource("Weather", "Sunny, 18°C");
+        const ai = makeAiProvider();
+        const notifier = makeNotifier();
+        const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+
+        config.LOG_API_RESPONSES = true;
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
+        await pipeline.run();
+        config.LOG_API_RESPONSES = false;
+
+        expect(consoleSpy).toHaveBeenCalledWith("[Weather] raw response:\nSunny, 18°C");
         consoleSpy.mockRestore();
     });
 });

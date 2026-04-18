@@ -1,8 +1,10 @@
 import "dotenv/config";
 import { EfaBwDepartureSource } from "./sources/efa-bw-departure-source";
-import { BUS_LINES_TOWARDS_HOME, BUS_LINES_TOWARDS_WORK, LOCATION_HOME, LOCATION_WORK, STOP_NAMES } from "./common/constants";
+import { BUS_LINES_TOWARDS_HOME, BUS_LINES_TOWARDS_WORK, LOCATION_HOME, LOCATION_WORK, STOP_NAMES, SYSTEM_PROMPT } from "./common/constants";
 import { Pipeline } from "./pipeline";
 import { WeatherDataSource } from "./sources/weather-data-source";
+import { GeminiProvider } from "./providers/gemini-provider";
+import { config } from "./config";
 
 export const main = async (): Promise<void> => {
     console.log("Daily Briefing Bot started.");
@@ -15,11 +17,14 @@ export const main = async (): Promise<void> => {
         new WeatherDataSource(LOCATION_WORK.name, LOCATION_WORK.lat, LOCATION_WORK.lon),
     ];
 
-    // TODO: replace with real implementations once GeminiProvider and TelegramNotifier are built
-    const aiProvider = { summarize: async (input: string) => input };
+    // TODO: replace with real implementations once TelegramNotifier is built
+    const aiProvider = config.AI_ENABLED
+        ? new GeminiProvider()
+        : { summarize: async (data: string) => data };
     const notifier = { notify: async (message: string) => { console.log("Briefing:\n", message); } };
 
-    const pipeline = new Pipeline(sources, aiProvider, notifier);
+    const runLabel = process.env.RUN_LABEL ?? "Unknown";
+    const pipeline = new Pipeline(sources, aiProvider, notifier, SYSTEM_PROMPT, runLabel);
     await pipeline.run();
 };
 

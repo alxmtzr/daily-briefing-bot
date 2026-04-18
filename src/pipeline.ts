@@ -1,6 +1,7 @@
 import { DataSource } from "./interfaces/data-source";
 import { AIProvider } from "./interfaces/ai-provider";
 import { Notifier } from "./interfaces/notifier";
+import { config } from "./config";
 
 async function withRetry<T>(
     fn: () => Promise<T>,
@@ -20,7 +21,9 @@ export class Pipeline {
     constructor(
         private readonly sources: DataSource[],
         private readonly aiProvider: AIProvider,
-        private readonly notifier: Notifier
+        private readonly notifier: Notifier,
+        private readonly systemPrompt: string,
+        private readonly runLabel: string
     ) {}
 
     async run(): Promise<void> {
@@ -29,6 +32,9 @@ export class Pipeline {
         for (const source of this.sources) {
             try {
                 const data = await withRetry(() => source.fetchData());
+                if (config.LOG_API_RESPONSES) {
+                    console.log(`[${source.name}] raw response:\n${data}`);
+                }
                 results.push(`[${source.name}]\n${data}`);
             } catch (error) {
                 console.error(`Failed to fetch from "${source.name}" after retries:`, error);
@@ -36,8 +42,8 @@ export class Pipeline {
             }
         }
 
-        const aggregated = results.join("\n\n");
-        const summary = await this.aiProvider.summarize(aggregated);
+        const aggregated = `Run: ${this.runLabel}\n\n` + results.join("\n\n");
+        const summary = await withRetry(() => this.aiProvider.summarize(aggregated, this.systemPrompt));
         await this.notifier.notify(summary);
     }
 }
