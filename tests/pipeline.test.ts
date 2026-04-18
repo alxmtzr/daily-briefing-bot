@@ -3,6 +3,7 @@ import { Pipeline } from "../src/pipeline";
 import { DataSource } from "../src/interfaces/data-source";
 import { AIProvider } from "../src/interfaces/ai-provider";
 import { Notifier } from "../src/interfaces/notifier";
+import { config } from "../src/config";
 
 vi.useFakeTimers();
 
@@ -108,6 +109,21 @@ describe("Pipeline", () => {
             expect.any(Error)
         );
         expect(ai.summarize).toHaveBeenCalledWith("Run: Afternoon\n\n[Broken]\nFailed to fetch data.", "prompt");
+        consoleSpy.mockRestore();
+    });
+
+    it("logs raw source response when LOG_API_RESPONSES is enabled", async () => {
+        const source = makeSource("Weather", "Sunny, 18°C");
+        const ai = makeAiProvider();
+        const notifier = makeNotifier();
+        const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+
+        config.LOG_API_RESPONSES = true;
+        const pipeline = new Pipeline([source], ai, notifier, "prompt", "Morning");
+        await pipeline.run();
+        config.LOG_API_RESPONSES = false;
+
+        expect(consoleSpy).toHaveBeenCalledWith("[Weather] raw response:\nSunny, 18°C");
         consoleSpy.mockRestore();
     });
 });

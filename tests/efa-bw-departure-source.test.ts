@@ -1,7 +1,7 @@
 import { vi, it, describe, expect, beforeEach } from "vitest";
 import axios from "axios";
 import { EfaBwDepartureSource } from "../src/sources/efa-bw-departure-source";
-import { BUS_LINES_TOWARDS_WORK, BUS_LINES_TOWARDS_HOME } from "../src/common/constants";
+import { BUS_LINES_TOWARDS_WORK } from "../src/common/constants";
 import { StopEvent } from "../src/types/efa-bw-types";
 
 vi.mock("axios");
@@ -140,15 +140,15 @@ describe("EfaBwDepartureSource", () => {
         expect(result).toContain("Line 710 → Markdorf Bahnhof");
     });
 
-    it("works with BUS_LINES_TOWARDS_HOME", async () => {
-        const homeSource = new EfaBwDepartureSource("Afternoon bus", "7704147", BUS_LINES_TOWARDS_HOME, "1600");
-        const event = makeStopEvent({
-            transportation: { number: "700", destination: { name: "Ravensburg Bahnhof" } }
+    it("handles stop events without infos field gracefully", async () => {
+        const eventWithoutInfos = makeStopEvent({
+            transportation: { number: "1", destination: { name: "X" } },
+            infos: undefined,
         });
-        vi.mocked(axios.get).mockResolvedValue({ data: { stopEvents: [event] } });
+        vi.mocked(axios.get).mockResolvedValue({ data: { stopEvents: [eventWithoutInfos] } });
 
-        const result = await homeSource.fetchData();
+        const result = await source.fetchData();
 
-        expect(result).toContain("Line 700 → Ravensburg Bahnhof");
+        expect(result).toBe("No relevant departures found.");
     });
 });
