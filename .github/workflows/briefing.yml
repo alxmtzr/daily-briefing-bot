@@ -1,0 +1,55 @@
+name: Daily Briefing
+
+on:
+  schedule:
+    - cron: '10 5 * * 2-4'   # 07:10 CEST / 06:10 CET  (Tue–Thu, morning)
+    - cron: '10 14 * * 2-4'  # 16:10 CEST / 15:10 CET  (Tue–Thu, afternoon)
+  workflow_dispatch:
+    inputs:
+      run_label:
+        description: 'Run label (e.g. Morning, Afternoon, Manual)'
+        required: false
+        default: 'Manual'
+
+jobs:
+  briefing:
+    name: Send briefing
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Resolve run label
+        id: label
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "value=${{ github.event.inputs.run_label }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "10 5 * * 2-4" ]; then
+            echo "value=Morning" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=Afternoon" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Log run context
+        run: echo "Trigger → ${{ github.event_name }} | Run label → ${{ steps.label.outputs.value }}"
+
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Send briefing
+        run: npm start
+        env:
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          NOTIFIER_BOT_TOKEN: ${{ secrets.NOTIFIER_BOT_TOKEN }}
+          NOTIFIER_CHAT_ID: ${{ secrets.NOTIFIER_CHAT_ID }}
+          RUN_LABEL: ${{ steps.label.outputs.value }}
