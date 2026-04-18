@@ -4,6 +4,7 @@ import { BUS_LINES_TOWARDS_HOME, BUS_LINES_TOWARDS_WORK, LOCATION_HOME, LOCATION
 import { Pipeline } from "./pipeline";
 import { WeatherDataSource } from "./sources/weather-data-source";
 import { GeminiProvider } from "./providers/gemini-provider";
+import { TelegramNotifier } from "./notifiers/telegram-notifier";
 import { config } from "./config";
 
 export const main = async (): Promise<void> => {
@@ -17,11 +18,12 @@ export const main = async (): Promise<void> => {
         new WeatherDataSource(LOCATION_WORK.name, LOCATION_WORK.lat, LOCATION_WORK.lon),
     ];
 
-    // TODO: replace with real implementations once TelegramNotifier is built
     const aiProvider = config.AI_ENABLED
         ? new GeminiProvider()
         : { summarize: async (data: string) => data };
-    const notifier = { notify: async (message: string) => { console.log("Briefing:\n", message); } };
+    const notifier = config.NOTIFIER_ENABLED
+        ? new TelegramNotifier()
+        : { notify: async (message: string) => { console.log("Briefing:\n", message); } };
 
     const runLabel = process.env.RUN_LABEL ?? "Unknown";
     const pipeline = new Pipeline(sources, aiProvider, notifier, SYSTEM_PROMPT, runLabel);

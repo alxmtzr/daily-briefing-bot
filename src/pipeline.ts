@@ -44,6 +44,8 @@ export class Pipeline {
 
         const aggregated = `Run: ${this.runLabel}\n\n` + results.join("\n\n");
         const summary = await withRetry(() => this.aiProvider.summarize(aggregated, this.systemPrompt));
-        await this.notifier.notify(summary);
+        const date = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+        const header = `📋 <b>${this.runLabel} Briefing — ${date}</b>\n\n`;
+        await this.notifier.notify(header + summary);
     }
 }

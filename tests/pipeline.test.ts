@@ -22,6 +22,7 @@ const makeNotifier = (): Notifier => ({
 
 describe("Pipeline", () => {
     it("fetches all sources, summarizes, and notifies", async () => {
+        vi.setSystemTime(new Date("2026-04-18"));
         const source1 = makeSource("Transport", "Line 700 on time");
         const source2 = makeSource("Weather", "Sunny, 18°C");
         const ai = makeAiProvider("Everything looks good today.");
@@ -34,7 +35,9 @@ describe("Pipeline", () => {
             "Run: Morning\n\n[Transport]\nLine 700 on time\n\n[Weather]\nSunny, 18°C",
             "You are a briefing assistant."
         );
-        expect(notifier.notify).toHaveBeenCalledWith("Everything looks good today.");
+        expect(notifier.notify).toHaveBeenCalledWith(
+            "📋 <b>Morning Briefing — Saturday, 18 April 2026</b>\n\nEverything looks good today."
+        );
     });
 
     it("retries a failing source and succeeds on second attempt", async () => {
@@ -71,7 +74,7 @@ describe("Pipeline", () => {
         await runPromise;
 
         expect(ai.summarize).toHaveBeenCalledTimes(2);
-        expect(notifier.notify).toHaveBeenCalledWith("Looks good today.");
+        expect(notifier.notify).toHaveBeenCalledWith(expect.stringContaining("Looks good today."));
     });
 
     it("throws when AI provider fails all retries", async () => {
