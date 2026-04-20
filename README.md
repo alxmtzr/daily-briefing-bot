@@ -12,10 +12,8 @@
 
 <p align="center">
   <img src="assets/telegram-bot-message.jpg" alt="Telegram mobile" height="420" />
-  &nbsp;&nbsp;&nbsp;
-  <img src="assets/telegram-bot-message-web.png" alt="Telegram web" height="420" />
   <br /><br />
-  <sub>Briefing message on mobile and web</sub>
+  <sub>Briefing message on mobile</sub>
 </p>
 
 
