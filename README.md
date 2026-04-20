@@ -187,17 +187,36 @@ The bot runs entirely on GitHub Actions — no server required. Three workflows 
 
 | Workflow | File | Trigger |
 |---|---|---|
-| Daily briefing | `briefing.yml` | Cron schedule + manual |
+| Daily briefing | `briefing.yml` | External cron + manual |
 | Unit tests & coverage | `ci.yml` | Push / PR to `main` |
 | Integration tests | `integration.yml` | Push / PR to `main` + nightly |
 
-### Schedule
+### Scheduling
 
-| Cron | Time (Germany) | Days | Content |
-|---|---|---|---|
-| `10 5 * * 2-4` | 07:10 | Tue–Thu | Transport + Weather |
-| `10 14 * * 2-4` | 16:10 | Tue–Thu | Transport + Weather |
-| `10 5 * * 0,1,5,6` | 07:10 | Mon, Fri–Sun | Weather only |
+GitHub Actions native cron (`schedule:`) is unreliable — executions can be delayed by up to 2 hrs or skipped entirely under load. For a time-sensitive morning briefing this is unacceptable.
+
+**Recommended: [cron-job.org](https://cron-job.org)** (free, no credit card required)
+
+Instead of relying on GitHub's scheduler, cron-job.org triggers the workflow at the exact time via the GitHub API `workflow_dispatch` event. The `briefing.yml` workflow has no `schedule:` trigger — it only responds to `workflow_dispatch`.
+
+**Setup:**
+
+1. Create a GitHub Personal Access Token (PAT) with `workflow` scope
+2. On cron-job.org, create one job per schedule entry:
+
+| Title | Cron | Time (Germany) | Run label | Days |
+|---|---|---|---|---|
+| `daily-briefing-morning` | `10 7 * * 2-4` | 07:10 | `Morning` | Tue–Thu |
+| `daily-briefing-afternoon` | `10 16 * * 2-4` | 16:10 | `Afternoon` | Tue–Thu |
+| `daily-briefing-morning-weather` | `0 7 * * 0,1,5,6` | 07:00 | `Morning` | Mon, Fri–Sun |
+
+For each job, configure:
+- **URL:** `https://api.github.com/repos/<your-user>/daily-briefing-bot/actions/workflows/briefing.yml/dispatches`
+- **Method:** `POST`
+- **Headers:**
+  - `Authorization: Bearer <your-PAT>`
+  - `Accept: application/vnd.github+json`
+- **Body:** `{"ref":"main","inputs":{"run_label":"Morning"}}` (adjust `run_label` per job)
 
 ### Required Secrets
 

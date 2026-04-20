@@ -1,10 +1,6 @@
 name: Daily Briefing
 
 on:
-  schedule:
-    - cron: '10 5 * * 2-4'   # 07:10 CEST / 06:10 CET  (Tue–Thu, morning — transport + weather)
-    - cron: '10 14 * * 2-4'  # 16:10 CEST / 15:10 CET  (Tue–Thu, afternoon — transport + weather)
-    - cron: '10 5 * * 0,1,5,6'  # 07:10 CEST / 06:10 CET  (Mon, Fri–Sun, morning — weather only)
   workflow_dispatch:
     inputs:
       run_label:
@@ -20,14 +16,7 @@ jobs:
     steps:
       - name: Resolve run label
         id: label
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "value=${{ github.event.inputs.run_label }}" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.schedule }}" = "10 14 * * 2-4" ]; then
-            echo "value=Afternoon" >> "$GITHUB_OUTPUT"
-          else
-            echo "value=Morning" >> "$GITHUB_OUTPUT"
-          fi
+        run: echo "value=${{ github.event.inputs.run_label }}" >> "$GITHUB_OUTPUT"
 
       - name: Log run context
         run: echo "Trigger → ${{ github.event_name }} | Run label → ${{ steps.label.outputs.value }}"
