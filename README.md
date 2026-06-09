@@ -5,9 +5,9 @@
 <h1 align="center">Daily Briefing Bot</h1>
 
 <p align="center">
-  A personal automation bot that delivers a daily briefing via Telegram.<br />
-  Collects public transport departures and weather forecasts, summarizes them with Google Gemini,<br />
-  and sends a concise message — fully automated via GitHub Actions, no server required.
+  A personal automation bot that delivers daily briefings via Telegram.<br />
+  Collects public transport departures, weather forecasts, and more — summarizes with Google Gemini,<br />
+  and sends concise messages. Runs fully automated on a VPS via Docker and cron.
 </p>
 
 <p align="center">
@@ -19,11 +19,13 @@
 
 ## Table of Contents
 
+- [Jobs](#jobs)
 - [Architecture](#architecture)
 - [Project Structure](#project-structure)
 - [Getting Started Locally](#getting-started-locally)
-- [GitHub Actions Setup](#github-actions-setup)
+- [VPS Deployment](#vps-deployment)
 - [Extending the Bot](#extending-the-bot)
+  - [Adding a Job](#adding-a-job)
   - [Adding a Data Source](#adding-a-data-source)
   - [Adding a Notifier](#adding-a-notifier)
   - [Swapping the AI Provider](#swapping-the-ai-provider)
@@ -31,26 +33,42 @@
 
 
 
+## Jobs
+
+The bot supports multiple independent jobs, selected via the `JOB` environment variable:
+
+| Job | Description | AI | Notifier |
+|---|---|---|---|
+| `commute-weather-briefing` | Bus departures + weather forecast, summarized by Gemini | ✅ | Telegram |
+| `indoor-pool-checker` | Scrapes indoor pool opening status | ❌ | Telegram |
+
+Each job runs in its own Docker container with isolated environment variables (separate Telegram bots, credentials, etc.).
+
+
+
 ## Architecture
 
-The bot follows a simple pipeline:
-
 ```
-GitHub Actions cron
-       │
-       ▼
-  Data Sources (fetch in parallel)
-  ├── EFA-BW departure monitor (bus lines)
-  └── Open-Meteo weather API
-       │
-       ▼
-  Pipeline (aggregate → summarize → notify)
-       │
-       ▼
-  AI Provider (Google Gemini)
-       │
-       ▼
-  Notifier (Telegram)
+cron (VPS)
+    │
+    ├── docker compose run --rm commute-weather-briefing
+    │         │
+    │         ▼
+    │   Data Sources (fetch in parallel)
+    │   ├── EFA-BW departure monitor (bus lines)
+    │   └── Open-Meteo weather API
+    │         │
+    │         ▼
+    │   Pipeline → Gemini AI → Telegram
+    │
+    └── docker compose run --rm indoor-pool-checker
+              │
+              ▼
+        Data Sources
+        └── Hallenbad Ravensburg scraper
+              │
+              ▼
+        Pipeline → Telegram (no AI)
 ```
 
 All external systems are abstracted behind interfaces (`DataSource`, `AIProvider`, `Notifier`), making it straightforward to swap or add implementations without touching the core pipeline.
@@ -62,31 +80,37 @@ All external systems are abstracted behind interfaces (`DataSource`, `AIProvider
 ```
 src/
 ├── common/
-│   └── constants.ts          # Stop IDs, bus lines, locations, system prompt path
+│   └── constants.ts                   # Stop IDs, bus lines, locations, system prompt path
 ├── interfaces/
-│   ├── data-source.ts        # DataSource interface
-│   ├── ai-provider.ts        # AIProvider interface
-│   └── notifier.ts           # Notifier interface
+│   ├── data-source.ts                 # DataSource interface
+│   ├── ai-provider.ts                 # AIProvider interface
+│   └── notifier.ts                    # Notifier interface
 ├── sources/
-│   ├── efa-bw-departure-source.ts   # Public transport (EFA-BW API)
-│   ├── weather-data-source.ts       # Weather (Open-Meteo API)
-│   └── web-scraper-source.ts        # Generic HTML scraper (Cheerio)
+│   ├── efa-bw-departure-source.ts     # Public transport (EFA-BW API)
+│   ├── weather-data-source.ts         # Weather (Open-Meteo API)
+│   ├── hallenbad-source.ts            # Indoor pool status scraper
+│   └── web-scraper-source.ts          # Generic HTML scraper (Cheerio)
 ├── providers/
-│   └── gemini-provider.ts    # Google Gemini AI summarization
+│   └── gemini-provider.ts             # Google Gemini AI summarization
 ├── notifiers/
-│   └── telegram-notifier.ts  # Telegram Bot API
+│   └── telegram-notifier.ts           # Telegram Bot API
 ├── resources/
-│   └── system-prompt.txt     # AI system prompt
-├── config.ts                 # Feature flags from environment variables
-├── pipeline.ts               # Core orchestration (fetch → summarize → notify)
-└── index.ts                  # Entry point
+│   └── system-prompt.txt             # AI system prompt
+├── jobs/
+│   ├── commute-weather-briefing.ts    # Job: commute + weather briefing
+│   └── indoor-pool-checker.ts        # Job: indoor pool status
+├── config.ts                         # Feature flags from environment variables
+├── pipeline.ts                       # Core orchestration (fetch → summarize → notify)
+└── index.ts                          # Entry point — routes JOB env var to job
 tests/
-├── integration/              # Real HTTP calls (run nightly)
-└── *.test.ts                 # Unit tests (mocked)
+├── integration/                      # Real HTTP calls (run nightly)
+└── *.test.ts                         # Unit tests (mocked)
 .github/workflows/
-├── briefing.yml              # Scheduled briefing delivery
-├── ci.yml                    # Tests + coverage on push/PR
-└── integration.yml           # Nightly integration tests
+├── ci.yml                            # Tests + coverage on push/PR
+├── deploy.yml                        # Auto-deploy to VPS on push to main
+└── integration.yml                   # Nightly integration tests
+docker-compose.yml                    # Two services, one per job
+Dockerfile                            # Multi-stage build: compile TS → production image
 ```
 
 
@@ -107,33 +131,29 @@ npm install
 
 ### 2. Configure environment variables
 
-Copy the example and fill in your values:
-
-```bash
-cp .env.example .env
-```
+Create a `.env` file in the project root:
 
 ```env
-# AI provider
+# Which job to run
+JOB=commute-weather-briefing
+
+# AI provider (only needed for commute-weather-briefing)
 AI_API_KEY=your_gemini_api_key
 
 # Telegram notifier
 NOTIFIER_BOT_TOKEN=your_telegram_bot_token
 NOTIFIER_CHAT_ID=your_telegram_chat_id
 
-# Run context (set manually for local runs)
-RUN_LABEL=Morning
-
 # Dev / testing flags
 AI_ENABLED=true               # set to false to skip Gemini and print raw data instead
 NOTIFIER_ENABLED=true         # set to false to print briefing to stdout instead of Telegram
 LOG_API_RESPONSES=false       # set to true to print each source's raw response to stdout
+FORCE_COMMUTING_DAY=false     # set to true to force bus data even on non-commuting days
 ```
 
 **Tips for local development:**
-- Set `AI_ENABLED=false` to skip the Gemini API call and see raw aggregated data in the console
-- Set `NOTIFIER_ENABLED=false` to print the briefing to stdout instead of sending it to Telegram
-- Combine both to run fully offline (useful for testing new data sources)
+- Set `AI_ENABLED=false` and `NOTIFIER_ENABLED=false` to run fully offline — useful for testing new data sources
+- Set `FORCE_COMMUTING_DAY=true` to always include bus departures regardless of the day
 
 ### 3. Run
 
@@ -144,6 +164,13 @@ npm run dev
 # Or build first, then run
 npm run build
 npm start
+```
+
+To run the indoor pool checker instead:
+
+```bash
+# change JOB= in your .env, then:
+npm run dev
 ```
 
 ### 4. Run tests
@@ -179,76 +206,86 @@ The free tier is sufficient for this project.
 
 ---
 
-## GitHub Actions Setup
+## VPS Deployment
 
-The bot runs entirely on GitHub Actions — no server required. Three workflows are included:
+The bot runs on a VPS using Docker and cron. GitHub Actions automatically deploys on every push to `main`.
 
-| Workflow | File | Trigger |
-|---|---|---|
-| Daily briefing | `briefing.yml` | External cron + manual |
-| Unit tests & coverage | `ci.yml` | Push / PR to `main` |
-| Integration tests | `integration.yml` | Push / PR to `main` + nightly |
+### How it works
 
-### Scheduling
+1. Push to `main` triggers `deploy.yml`
+2. GitHub Actions SSHes into the VPS, runs `git pull && docker compose build`
+3. Cron jobs on the VPS trigger `docker compose run --rm <job>` on schedule
+4. Each job runs in a short-lived container, sends its message, and exits
 
-GitHub Actions native cron (`schedule:`) is unreliable — executions can be delayed by up to 2 hrs or skipped entirely under load. For a time-sensitive morning briefing this is unacceptable.
-
-**Recommended: [cron-job.org](https://cron-job.org)** (free, no credit card required)
-
-Instead of relying on GitHub's scheduler, cron-job.org triggers the workflow at the exact time via the GitHub API `workflow_dispatch` event. The `briefing.yml` workflow has no `schedule:` trigger — it only responds to `workflow_dispatch`.
-
-**Setup:**
-
-1. Create a GitHub Personal Access Token (PAT) with `workflow` scope
-2. On cron-job.org, create one job per schedule entry:
-
-| Title | Cron | Time (Germany) | Run label | Days |
-|---|---|---|---|---|
-| `daily-briefing-morning` | `10 7 * * 2-4` | 07:10 | `Morning` | Tue–Thu |
-| `daily-briefing-afternoon` | `10 16 * * 2-4` | 16:10 | `Afternoon` | Tue–Thu |
-| `daily-briefing-morning-weather` | `0 7 * * 0,1,5,6` | 07:00 | `Morning` | Mon, Fri–Sun |
-
-For each job, configure:
-- **URL:** `https://api.github.com/repos/<your-user>/daily-briefing-bot/actions/workflows/briefing.yml/dispatches`
-- **Method:** `POST`
-- **Headers:**
-  - `Authorization: Bearer <your-PAT>`
-  - `Accept: application/vnd.github+json`
-- **Body:** `{"ref":"main","inputs":{"run_label":"Morning"}}` (adjust `run_label` per job)
-
-### Required Secrets
+### Required GitHub Secrets
 
 Add these in **Settings → Secrets and variables → Actions**:
 
 | Secret | Description |
 |---|---|
-| `AI_API_KEY` | Google Gemini API key |
-| `NOTIFIER_BOT_TOKEN` | Telegram Bot token |
-| `NOTIFIER_CHAT_ID` | Telegram chat ID to send messages to |
+| `VPS_HOST` | VPS IPv4 address |
+| `VPS_USER` | SSH username |
+| `VPS_SSH_KEY` | SSH private key |
+| `VPS_SSH_PORT` | SSH port |
 
-### Manual Trigger
+### VPS Setup
 
-The briefing workflow supports `workflow_dispatch` — trigger it manually from the **Actions** tab in your repository with a custom run label (e.g. `Morning`, `Afternoon`, `Manual`).
+1. Clone the repo on the VPS:
+   ```bash
+   git clone https://github.com/<your-user>/daily-briefing-bot /opt/daily-briefing-bot
+   ```
+
+2. Create `/opt/daily-briefing-bot/.env` with your credentials:
+   ```env
+   COMMUTE_AI_API_KEY=...
+   COMMUTE_NOTIFIER_BOT_TOKEN=...
+   COMMUTE_NOTIFIER_CHAT_ID=...
+   INDOOR_POOL_NOTIFIER_BOT_TOKEN=...
+   INDOOR_POOL_NOTIFIER_CHAT_ID=...
+   ```
+
+3. Add cron jobs (`crontab -e`):
+   ```
+   # Commute + weather — daily at 7am (bus only on Tue–Thu automatically)
+   0 7 * * * cd /opt/daily-briefing-bot && docker compose run --rm commute-weather-briefing
+
+   # Commute + weather — afternoon on Tue–Thu at 4pm
+   0 16 * * 2-4 cd /opt/daily-briefing-bot && docker compose run --rm commute-weather-briefing
+
+   # Indoor pool — Mon–Fri at 12pm
+   0 12 * * 1-5 cd /opt/daily-briefing-bot && docker compose run --rm indoor-pool-checker
+
+   # Indoor pool — Sat–Sun at 9am
+   0 9 * * 6,0 cd /opt/daily-briefing-bot && docker compose run --rm indoor-pool-checker
+   ```
+
+4. Fix git safe directory (needed when SSH user differs from repo owner):
+   ```bash
+   git config --global --add safe.directory /opt/daily-briefing-bot
+   ```
 
 ---
 
 ## Extending the Bot
 
-The bot is designed around three interfaces. Adding new capabilities means implementing one of them and registering it in `src/index.ts`.
+### Adding a Job
+
+1. Create `src/jobs/my-job.ts` and export a `runMyJob()` function
+2. Register it in `src/index.ts` with a new `case` in the switch
+3. Add a new service in `docker-compose.yml` with `JOB: my-job`
 
 ### Adding a Data Source
 
 Any class that implements `DataSource` can be added to the pipeline:
 
 ```ts
-// src/interfaces/data-source.ts
 export interface DataSource {
     name: string;
     fetchData(): Promise<string>;
 }
 ```
 
-`fetchData()` must return a plain text string describing the data. The pipeline aggregates all source outputs and passes them to the AI provider, which uses them to generate the briefing.
+`fetchData()` must return a plain text string. The pipeline aggregates all source outputs and passes them to the AI provider.
 
 **Example — a public holiday check:**
 
@@ -275,17 +312,6 @@ export class PublicHolidaySource implements DataSource {
 }
 ```
 
-Then register it in `src/index.ts`:
-
-```ts
-const sources = [
-    new PublicHolidaySource(),
-    // ... existing sources
-];
-```
-
-The AI summarizer will automatically include this data. Update `src/resources/system-prompt.txt` if you want the AI to handle the new data in a specific way (e.g. skip transport info on public holidays).
-
 ---
 
 ### Adding a Notifier
@@ -293,13 +319,10 @@ The AI summarizer will automatically include this data. Update `src/resources/sy
 Any class that implements `Notifier` can replace or run alongside Telegram:
 
 ```ts
-// src/interfaces/notifier.ts
 export interface Notifier {
     notify(message: string): Promise<void>;
 }
 ```
-
-The `message` passed to `notify()` is formatted as Telegram HTML (e.g. `<b>bold</b>`). Strip or convert tags if your target channel uses a different format.
 
 **Example — a Discord webhook notifier:**
 
@@ -318,19 +341,10 @@ export class DiscordNotifier implements Notifier {
     }
 
     async notify(message: string): Promise<void> {
-        // Discord uses plain text — strip HTML tags from Telegram formatting
         const plain = message.replace(/<[^>]+>/g, "");
         await axios.post(this.webhookUrl, { content: plain }, { timeout: 10000 });
     }
 }
-```
-
-Then swap it in `src/index.ts`:
-
-```ts
-const notifier = config.NOTIFIER_ENABLED
-    ? new DiscordNotifier()
-    : { notify: async (_message: string) => {} };
 ```
 
 ---
@@ -340,7 +354,6 @@ const notifier = config.NOTIFIER_ENABLED
 Any class that implements `AIProvider` can replace Gemini:
 
 ```ts
-// src/interfaces/ai-provider.ts
 export interface AIProvider {
     summarize(input: string, systemPrompt: string): Promise<string>;
 }
@@ -373,19 +386,12 @@ export class OpenAIProvider implements AIProvider {
 }
 ```
 
-Then swap it in `src/index.ts`:
-
-```ts
-const aiProvider = config.AI_ENABLED
-    ? new OpenAIProvider()
-    : { summarize: async (data: string) => data };
-```
-
 ---
 
 ## Tech Stack
 
 - **TypeScript** + Node.js
+- **Docker** + Docker Compose — containerized execution, one container per job
 - **Vitest** — unit and integration tests
 - **Axios** — HTTP client (10s timeout on all calls, with automatic retry)
 - **Cheerio** — HTML parsing for the web scraper source
@@ -393,4 +399,4 @@ const aiProvider = config.AI_ENABLED
 - **Telegram Bot API** — delivery channel
 - **Open-Meteo API** — weather data (no API key required)
 - **EFA-BW API** — public transport departures (Baden-Württemberg)
-- **GitHub Actions** — scheduling and execution (no server required)
+- **GitHub Actions** — CI, deploy on push to main
