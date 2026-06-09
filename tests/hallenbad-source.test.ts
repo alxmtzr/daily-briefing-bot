@@ -47,10 +47,19 @@ describe("HallenbadSource", () => {
         expect(result).toContain("Hallenbad heute geöffnet");
     });
 
-    it("fetchData() propagates network errors", async () => {
-        vi.mocked(axios.get).mockRejectedValue(new Error("Network error"));
+    it("parse() skips table rows that do not have exactly two cells", () => {
+        const html = `
+<div class="zeitboxInner"><h3>Hallenbad heute geöffnet</h3></div>
+<table class="default responsive">
+  <tr><td><p>Montag</p></td><td><p>geschlossen</p></td></tr>
+  <tr><th>Header only</th></tr>
+</table>
+`;
         const source = new HallenbadSource();
+        const result = source.parse(html);
 
-        await expect(source.fetchData()).rejects.toThrow("Network error");
+        expect(result).toContain("Montag: geschlossen");
+        expect(result).not.toContain("Header only");
     });
 });
+

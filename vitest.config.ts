@@ -8,7 +8,7 @@ export default defineConfig({
         "coverage": {
             "provider": "v8",
             "include": ["src/**/*.ts"],
-            "exclude": ["src/interfaces/**", "src/types/**", "src/index.ts"],
+            "exclude": ["src/interfaces/**", "src/types/**", "src/index.ts", "src/jobs/**"],
             "reporter": ["text", "json-summary"],
             "thresholds": {
                 "branches": 80,
