@@ -3,8 +3,8 @@ import { Pipeline } from "../pipeline";
 import { TelegramNotifier } from "../notifiers/telegram-notifier";
 import { config } from "../config";
 
-export const runHallenbadChecker = async (): Promise<void> => {
-    console.log("Job: hallenbad-checker started.");
+export const runIndoorPoolChecker = async (): Promise<void> => {
+    console.log("Job: indoor-pool-checker started.");
 
     const sources = [new HallenbadSource()];
 
@@ -13,7 +13,7 @@ export const runHallenbadChecker = async (): Promise<void> => {
         ? new TelegramNotifier()
         : { notify: async (_message: string) => {} };
 
-    const runLabel = "Hallenbad";
+    const runLabel = "Indoor Pool";
     const pipeline = new Pipeline(sources, aiProvider, notifier, "", runLabel, config);
 
     await pipeline.run();

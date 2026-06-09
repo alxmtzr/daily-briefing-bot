@@ -8,11 +8,11 @@ services:
       NOTIFIER_BOT_TOKEN: ${COMMUTE_NOTIFIER_BOT_TOKEN}
       NOTIFIER_CHAT_ID: ${COMMUTE_NOTIFIER_CHAT_ID}
 
-  hallenbad-checker:
+  indoor-pool-checker:
     build: .
     environment:
-      JOB: hallenbad-checker
-      RUN_LABEL: Hallenbad
+      JOB: indoor-pool-checker
+      RUN_LABEL: Indoor Pool
       NOTIFIER_BOT_TOKEN: ${HALLENBAD_NOTIFIER_BOT_TOKEN}
       NOTIFIER_CHAT_ID: ${HALLENBAD_NOTIFIER_CHAT_ID}
       AI_ENABLED: "false"
