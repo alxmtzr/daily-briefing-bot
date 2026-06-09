@@ -1,0 +1,18 @@
+services:
+  commute-weather-briefing:
+    build: .
+    environment:
+      JOB: commute-weather-briefing
+      RUN_LABEL: Morning
+      AI_API_KEY: ${COMMUTE_AI_API_KEY}
+      NOTIFIER_BOT_TOKEN: ${COMMUTE_NOTIFIER_BOT_TOKEN}
+      NOTIFIER_CHAT_ID: ${COMMUTE_NOTIFIER_CHAT_ID}
+
+  hallenbad-checker:
+    build: .
+    environment:
+      JOB: hallenbad-checker
+      RUN_LABEL: Hallenbad
+      NOTIFIER_BOT_TOKEN: ${HALLENBAD_NOTIFIER_BOT_TOKEN}
+      NOTIFIER_CHAT_ID: ${HALLENBAD_NOTIFIER_CHAT_ID}
+      AI_ENABLED: "false"
