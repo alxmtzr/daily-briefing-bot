@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { runCommuteWeatherBriefing } from "./jobs/commute-weather-briefing";
-import { runHallenbadChecker } from "./jobs/hallenbad-checker";
+import { runIndoorPoolChecker } from "./jobs/indoor-pool-checker";
 
 export const main = async (): Promise<void> => {
     const job = process.env.JOB ?? "commute-weather-briefing";
@@ -10,11 +10,11 @@ export const main = async (): Promise<void> => {
         case "commute-weather-briefing":
             await runCommuteWeatherBriefing();
             break;
-        case "hallenbad-checker":
-            await runHallenbadChecker();
+        case "indoor-pool-checker":
+            await runIndoorPoolChecker();
             break;
         default:
-            throw new Error(`Unknown job: "${job}". Valid jobs: commute-weather-briefing, hallenbad-checker`);
+            throw new Error(`Unknown job: "${job}". Valid jobs: commute-weather-briefing, indoor-pool-checker`);
     }
 };
 

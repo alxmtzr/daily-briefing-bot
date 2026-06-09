@@ -5,12 +5,12 @@ vi.mock("../src/jobs/commute-weather-briefing", () => ({
     runCommuteWeatherBriefing: vi.fn().mockResolvedValue(undefined),
 }));
 
-vi.mock("../src/jobs/hallenbad-checker", () => ({
-    runHallenbadChecker: vi.fn().mockResolvedValue(undefined),
+vi.mock("../src/jobs/indoor-pool-checker", () => ({
+    runIndoorPoolChecker: vi.fn().mockResolvedValue(undefined),
 }));
 
 import { runCommuteWeatherBriefing } from "../src/jobs/commute-weather-briefing";
-import { runHallenbadChecker } from "../src/jobs/hallenbad-checker";
+import { runIndoorPoolChecker } from "../src/jobs/indoor-pool-checker";
 
 describe("main dispatcher", () => {
     beforeEach(() => {
@@ -25,7 +25,7 @@ describe("main dispatcher", () => {
         delete process.env.JOB;
         await main();
         expect(runCommuteWeatherBriefing).toHaveBeenCalledOnce();
-        expect(runHallenbadChecker).not.toHaveBeenCalled();
+        expect(runIndoorPoolChecker).not.toHaveBeenCalled();
     });
 
     it("runs commute-weather-briefing when JOB=commute-weather-briefing", async () => {
@@ -34,10 +34,10 @@ describe("main dispatcher", () => {
         expect(runCommuteWeatherBriefing).toHaveBeenCalledOnce();
     });
 
-    it("runs hallenbad-checker when JOB=hallenbad-checker", async () => {
-        process.env.JOB = "hallenbad-checker";
+    it("runs indoor-pool-checker when JOB=indoor-pool-checker", async () => {
+        process.env.JOB = "indoor-pool-checker";
         await main();
-        expect(runHallenbadChecker).toHaveBeenCalledOnce();
+        expect(runIndoorPoolChecker).toHaveBeenCalledOnce();
         expect(runCommuteWeatherBriefing).not.toHaveBeenCalled();
     });
 
