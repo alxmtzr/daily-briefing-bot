@@ -8,6 +8,15 @@ services:
       NOTIFIER_BOT_TOKEN: ${COMMUTE_NOTIFIER_BOT_TOKEN}
       NOTIFIER_CHAT_ID: ${COMMUTE_NOTIFIER_CHAT_ID}
 
+  commute-weather-briefing-afternoon:
+    build: .
+    environment:
+      JOB: commute-weather-briefing
+      RUN_LABEL: Afternoon
+      AI_API_KEY: ${COMMUTE_AI_API_KEY}
+      NOTIFIER_BOT_TOKEN: ${COMMUTE_NOTIFIER_BOT_TOKEN}
+      NOTIFIER_CHAT_ID: ${COMMUTE_NOTIFIER_CHAT_ID}
+
   indoor-pool-checker:
     build: .
     environment:
