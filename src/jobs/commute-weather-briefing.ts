@@ -14,10 +14,15 @@ export const runCommuteWeatherBriefing = async (): Promise<void> => {
     const isCommutingDay = config.FORCE_COMMUTING_DAY || (today >= 2 && today <= 4); // Tue–Thu
     console.log(`Day: ${today} | Commuting day: ${isCommutingDay}${config.FORCE_COMMUTING_DAY ? " (forced)" : ""}`);
 
+    const runLabel = process.env.RUN_LABEL ?? "Unknown";
+    const isAfternoon = runLabel === "Afternoon";
+
     const sources = [
-        ...(isCommutingDay ? [
+        ...(isCommutingDay && !isAfternoon ? [
             new EfaBwDepartureSource(STOP_NAMES.TOWARDS_WORK_PRIMARY, STOP_IDS.TOWARDS_WORK_PRIMARY, BUS_LINES_TOWARDS_WORK, "0715"),
             new EfaBwDepartureSource(STOP_NAMES.TOWARDS_WORK_ALTERNATIVE, STOP_IDS.TOWARDS_WORK_ALTERNATIVE, BUS_LINES_TOWARDS_WORK, "0715"),
+        ] : []),
+        ...(isCommutingDay && isAfternoon ? [
             new EfaBwDepartureSource(STOP_NAMES.TOWARDS_HOME, STOP_IDS.TOWARDS_HOME, BUS_LINES_TOWARDS_HOME, "1615"),
         ] : []),
         new WeatherDataSource(LOCATION_HOME.name, LOCATION_HOME.lat, LOCATION_HOME.lon),
@@ -31,7 +36,6 @@ export const runCommuteWeatherBriefing = async (): Promise<void> => {
         ? new TelegramNotifier()
         : { notify: async (_message: string) => {} };
 
-    const runLabel = process.env.RUN_LABEL ?? "Unknown";
     const pipeline = new Pipeline(sources, aiProvider, notifier, SYSTEM_PROMPT, runLabel, config);
 
     try {
