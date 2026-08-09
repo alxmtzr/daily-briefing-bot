@@ -37,6 +37,14 @@ describe("HallenbadSource", () => {
         expect(result).toContain(HALLENBAD_URL);
     });
 
+    it("parse() preserves Sommerpause status heading", () => {
+        const source = new HallenbadSource();
+        const result = source.parse(makeHtml("Hallenbad geschlossen - Sommerpause"));
+
+        expect(result).toContain("Hallenbad geschlossen - Sommerpause");
+        expect(result).toContain(HALLENBAD_URL);
+    });
+
     it("fetchData() calls the correct URL and returns parsed text", async () => {
         vi.mocked(axios.get).mockResolvedValue({ data: makeHtml("Hallenbad heute geöffnet") });
         const source = new HallenbadSource();
@@ -62,4 +70,3 @@ describe("HallenbadSource", () => {
         expect(result).not.toContain("Header only");
     });
 });
-

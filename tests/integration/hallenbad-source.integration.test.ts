@@ -7,7 +7,7 @@ describe("HallenbadSource — Integration", () => {
 
         const result = await source.fetchData();
 
-        expect(result).toMatch(/Hallenbad heute (geöffnet|geschlossen)/i);
+        expect(result).toMatch(/Hallenbad.*(geöffnet|geschlossen|Sommerpause)/i);
         expect(result).toContain("Montag");
         expect(result).toContain("Uhr");
         expect(result).toContain("https://www.ravensburg.de/rv/kultur-freizeit-einkaufen/hallenbad/oeffnungszeiten-preise-hallenbad.php");
