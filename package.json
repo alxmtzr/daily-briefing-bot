@@ -27,10 +27,10 @@
   "homepage": "https://github.com/alxmtzr/daily-briefing-bot#readme",
   "devDependencies": {
     "@types/node": "^25.6.0",
-    "@vitest/coverage-v8": "^4.1.4",
+    "@vitest/coverage-v8": "^5.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.2",
-    "vitest": "^4.1.4"
+    "vitest": "^5.0.0"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
