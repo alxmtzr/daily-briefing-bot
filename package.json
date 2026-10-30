@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/alxmtzr/daily-briefing-bot#readme",
   "devDependencies": {
-    "@types/node": "^25.6.0",
+    "@types/node": "^26.0.0",
     "@vitest/coverage-v8": "^4.1.4",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.2",
