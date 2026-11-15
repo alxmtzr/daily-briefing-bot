@@ -4,6 +4,9 @@
 
 <h1 align="center">Daily Briefing Bot</h1>
 
+> [!WARNING]
+> **Repository Unmaintained & Archived:** This project is no longer actively maintained or updated. The repository remains publicly visible for reference and demonstration purposes.
+
 <p align="center">
   A personal automation bot that delivers daily briefings via Telegram.<br />
   Collects public transport departures, weather forecasts, and more — summarizes with Google Gemini,<br />
